@@ -1,0 +1,56 @@
+<?php
+
+  namespace Funivan\Cs\Configuration;
+
+  use Funivan\Cs\Review\Tools\ComposerReview;
+  use Funivan\Cs\Review\Tools\PhpFileCloseTagReview;
+  use Funivan\Cs\Review\Tools\PhpFileStartReview;
+  use Funivan\Cs\Review\Tools\PhpSyntaxCheckReview;
+  use Funivan\Cs\ToolBag\LineEnding\LineEndingFixer;
+  use Funivan\Cs\ToolBag\LineEnding\LineEndingReview;
+  use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
+  use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
+  use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagFixer;
+  use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagReview;
+  use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsFixer;
+  use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsReview;
+  use Funivan\Cs\ToolBag\SpacesInEmptyLines\ReplaceSpacesInEmptyLinesFixer;
+  use Funivan\Cs\ToolBag\SpacesInEmptyLines\SpacesInEmptyLinesReview;
+
+  /**
+   * List of default fixers and review tools
+   */
+  final class DefaultTools {
+
+    /**
+     * @return array Array<String,String>
+     */
+    public static function getFixTools() {
+      return [
+        LineEndingFixer::NAME => LineEndingFixer::class,
+        LineAfterOpenTagFixer::NAME_FIXER => LineAfterOpenTagFixer::class,
+        PhpOpenTagsFixer::NAME => PhpOpenTagsFixer::class,
+        ReplaceSpacesInEmptyLinesFixer::NAME => ReplaceSpacesInEmptyLinesFixer::class,
+        LineBeforeClassEndFixer::NAME => LineBeforeClassEndFixer::class,
+      ];
+    }
+
+
+    /**
+     * @return array Array<String,String>
+     */
+    public static function getReviewTools() {
+      return [
+        LineEndingReview::NAME => LineEndingReview::class,
+        LineBeforeClassEndReview::NAME => LineBeforeClassEndReview::class,
+        PhpFileStartReview::NAME => PhpFileStartReview::class,
+        PhpSyntaxCheckReview::NAME => PhpSyntaxCheckReview::class,
+        PhpFileCloseTagReview::NAME => PhpFileCloseTagReview::class,
+        SpacesInEmptyLinesReview::NAME => SpacesInEmptyLinesReview::class,
+        ComposerReview::NAME => ComposerReview::class,
+        LineAfterOpenTagReview::NAME => LineAfterOpenTagReview::class,
+        PhpOpenTagsReview::NAME => PhpOpenTagsReview::class,
+      ];
+    }
+
+  }

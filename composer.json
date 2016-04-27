@@ -1,0 +1,40 @@
+{
+  "name": "funivan/cs",
+  "description": "Perform code fix and review",
+  "keywords": [
+    "fixer",
+    "review",
+    "fix"
+  ],
+  "homepage": "https://github.com/funivan/Cs",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Scherbak",
+      "email": "dev@funivan.com",
+      "homepage": "http://funivan.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "symfony/console": "^3.0",
+    "symfony/finder": "^3.0",
+    "symfony/process": "^3.0",
+    "funivan/php-tokenizer": "0.1.2-alpha4",
+    "fiv/collection": "^0.0.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Funivan\\Cs\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Funivan\\Cs\\Test\\": "Tests"
+    }
+  }
+}
