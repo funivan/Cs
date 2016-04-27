@@ -28,6 +28,32 @@ composer require funivan/cs:dev-master
 
 ```
 
+## Custom configuration
+Create custom configuration file. For example `cs-fix.php`
+
+```php
+<?
+  # file cs-fix.php
+  require __DIR__ . '/vendor/autoload.php';
+
+
+  use Funivan\Cs\Configuration\CsConfiguration;
+  use Funivan\Cs\Configuration\ToolConfiguration;
+  use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactory;
+
+  $configuration = CsConfiguration::createFixerConfiguration();
+  $configuration->setFileFinderFactory(new FileFinderFactory(__DIR__));
+
+  // You can add custom tools
+  // $configuration->addToolConfiguration(new ToolConfiguration('my_custom_tool', \MyCustomToolFixer::class));
+
+  return $configuration;
+```
+Then run fixer
+```sh
+  ./vendor/bin/cs.php fix --configuration=cs-fixer.php -vvv
+```
+
 ## Testing
 
 ``` bash
