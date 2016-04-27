@@ -2,9 +2,13 @@
   "name": "funivan/cs",
   "description": "Perform code fix and review",
   "keywords": [
+    "code style",
+    "code fix",
+    "code review",
+    "coding standards",
+    "static analysis",
     "fixer",
-    "review",
-    "fix"
+    "review"
   ],
   "homepage": "https://github.com/funivan/Cs",
   "license": "MIT",
