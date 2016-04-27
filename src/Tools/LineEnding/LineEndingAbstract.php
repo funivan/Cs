@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\LineEnding;
+  namespace Funivan\Cs\Tools\LineEnding;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\FileProcessor\CanProcessHelper;
@@ -9,14 +9,24 @@
   use Funivan\PhpTokenizer\Token;
 
   /**
-   *
+   * @todo add configuration. User specify
    */
   abstract class LineEndingAbstract implements FileTool {
 
-    const REGEX = '~\r\n?~';
+    /**
+     * @var array
+     */
+    private static $lineEndings = [
+      'crlf' => "\r\n",
+      'lf' => "\n",
+      'cr' => "\r",
+    ];
+
+    const REGEX = '!\r\n?!';
 
 
     /**
+     * @codeCoverageIgnore
      * @param FileInfo $file
      * @return boolean
      */
@@ -26,10 +36,11 @@
 
 
     /**
+     * @codeCoverageIgnore
      * @return string
      */
     public function getDescription() {
-      return 'Use LF line ending';
+      return 'Use correct line ending';
     }
 
 

@@ -22,6 +22,16 @@
      * @param string $expect
      */
     public function process($input, $expect) {
+      $output = $this->convert($input);
+      $this->assertEquals($expect, $output);
+    }
+
+
+    /**
+     * @param string $input
+     * @return string
+     */
+    protected function convert($input) {
       $path = tempnam(sys_get_temp_dir(), 'fix-test');
       file_put_contents($path, $input);
 
@@ -35,7 +45,7 @@
 
 
       $output = $tokenizer->getCollection()->assemble();
-      $this->assertEquals($expect, $output);
+      return $output;
     }
 
   }

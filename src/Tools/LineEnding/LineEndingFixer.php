@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\LineEnding;
+  namespace Funivan\Cs\Tools\LineEnding;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\Message\Report;
@@ -10,10 +10,11 @@
    */
   class LineEndingFixer extends LineEndingAbstract {
 
-    const NAME = 'php_line_ending_fixer';
+    const NAME = 'line_ending_fixer';
 
 
     /**
+     * @codeCoverageIgnore
      * @inheritdoc
      */
     public function getName() {
@@ -30,9 +31,12 @@
       $tokens = $this->getInvalidStartTokens($file);
 
       foreach ($tokens as $token) {
-        $report->addError($file, $this, 'Expect only LF line ending', $token->getLine());
-      }
+        $value = $token->getValue();
+        $value = preg_replace(self::REGEX, "\n", $value);
+        $token->setValue($value);
 
+        $report->addNotice($file, $this, 'Replace invalid line ending', $token->getLine());
+      }
     }
 
   }
