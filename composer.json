@@ -36,5 +36,8 @@
     "psr-4": {
       "Funivan\\Cs\\Test\\": "Tests"
     }
-  }
+  },
+  "bin": [
+    "bin/cs.php"
+  ]
 }

@@ -14,12 +14,17 @@ Perform code fix and review
 Via Composer
 
 ``` bash
-composer require funivan/cs
+composer require funivan/cs:dev-master
 ```
 
 ## Usage
 
-``` php
+```sh
+  # run review tool
+  ./vendor/bin/cs.php review;
+
+  # run fixer tool
+  ./vendor/bin/cs.php fix;
 
 ```
 
