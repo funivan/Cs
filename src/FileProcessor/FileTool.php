@@ -16,6 +16,7 @@
      * Review tools should have ending `_review`
      * Fixer tools should have ending `_fixer`
      *
+     * @codeCoverageIgnore
      * @return string
      */
     public function getName();

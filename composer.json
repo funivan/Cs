@@ -38,7 +38,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Funivan\\Cs\\Test\\": "Tests"
+      "Tests\\Funivan\\Cs\\": "Tests"
     }
   },
   "bin": [

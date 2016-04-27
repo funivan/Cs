@@ -1,8 +1,9 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\SpacesInEmptyLines;
+  namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
   use Funivan\Cs\FileFinder\FileInfo;
+  use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\PhpTokenizer\Query\Query;
 
@@ -12,11 +13,12 @@
   abstract class AbstractSpacesInEmptyLines implements FileTool {
 
     /**
+     * @codeCoverageIgnore
      * @param FileInfo $file
      * @return boolean
      */
     public function canProcess(FileInfo $file) {
-      return ($file->getStatus() !== FileInfo::STATUS_DELETED and in_array($file->getExtension(), ['php', 'html']));
+      return (new CanProcessHelper())->notDeleted()->extension(['php', 'html'])->isValid($file);
     }
 
 
@@ -28,10 +30,15 @@
       $tokens = $file->getTokenizer()->getCollection();
 
       $query = new Query();
-      $query->valueLike('!\n([ ]+)\n!');
+      $query->valueLike('!\n[ ]+\n!');
       $query->typeIs(T_WHITESPACE);
 
       $stripTokens = $tokens->find($query);
+
+      $lastToken = $tokens->getLast();
+      if (preg_match('![ ]+\n*$!', $lastToken->getValue())) {
+        $stripTokens->append($lastToken);
+      }
 
       return $stripTokens;
     }

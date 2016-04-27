@@ -14,8 +14,8 @@
   use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagReview;
   use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsFixer;
   use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsReview;
-  use Funivan\Cs\ToolBag\SpacesInEmptyLines\ReplaceSpacesInEmptyLinesFixer;
-  use Funivan\Cs\ToolBag\SpacesInEmptyLines\SpacesInEmptyLinesReview;
+  use Funivan\Cs\Tools\SpacesInEmptyLines\ReplaceSpacesInEmptyLinesFixer;
+  use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
 
   /**
    * List of default fixers and review tools

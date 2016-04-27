@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\SpacesInEmptyLines;
+  namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\Message\Report;
@@ -9,10 +9,11 @@
    */
   class ReplaceSpacesInEmptyLinesFixer extends AbstractSpacesInEmptyLines {
 
-    const NAME = 'replace_spaces_in_empty_lines_fixes';
+    const NAME = 'spaces_in_empty_lines_fixes';
 
 
     /**
+     * @codeCoverageIgnore
      * @inheritdoc
      */
     public function getName() {
@@ -21,6 +22,7 @@
 
 
     /**
+     * @codeCoverageIgnore
      * @return string
      */
     public function getDescription() {
@@ -44,6 +46,7 @@
         $value = $token->getValue();
 
         $value = preg_replace('!\n([ ]+)\n!', "\n\n", $value);
+        $value = preg_replace("!\s+\n$!", "\n", $value);
         $token->setValue($value);
       }
 

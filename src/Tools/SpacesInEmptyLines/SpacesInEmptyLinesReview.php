@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\SpacesInEmptyLines;
+  namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\Message\Report;
