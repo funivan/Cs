@@ -14,7 +14,7 @@
   use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagReview;
   use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsFixer;
   use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsReview;
-  use Funivan\Cs\Tools\SpacesInEmptyLines\ReplaceSpacesInEmptyLinesFixer;
+  use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
 
   /**
@@ -30,7 +30,7 @@
         LineEndingFixer::NAME => LineEndingFixer::class,
         LineAfterOpenTagFixer::NAME_FIXER => LineAfterOpenTagFixer::class,
         PhpOpenTagsFixer::NAME => PhpOpenTagsFixer::class,
-        ReplaceSpacesInEmptyLinesFixer::NAME => ReplaceSpacesInEmptyLinesFixer::class,
+        SpacesInEmptyLinesFixer::NAME => SpacesInEmptyLinesFixer::class,
         LineBeforeClassEndFixer::NAME => LineBeforeClassEndFixer::class,
       ];
     }

@@ -6,6 +6,7 @@
   use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\PhpTokenizer\Query\Query;
+  use Funivan\PhpTokenizer\Token;
 
   /**
    *
@@ -33,14 +34,20 @@
       $query->valueLike('!\n[ ]+\n!');
       $query->typeIs(T_WHITESPACE);
 
-      $stripTokens = $tokens->find($query);
+      return $tokens->find($query);
+    }
 
-      $lastToken = $tokens->getLast();
+
+    /**
+     * @param FileInfo $file
+     * @return Token
+     */
+    protected function getLastInvalidToken(FileInfo $file) {
+      $lastToken = $file->getTokenizer()->getCollection()->getLast();
       if (preg_match('![ ]+\n*$!', $lastToken->getValue())) {
-        $stripTokens->append($lastToken);
+        return $lastToken;
       }
-
-      return $stripTokens;
+      return null;
     }
 
   }

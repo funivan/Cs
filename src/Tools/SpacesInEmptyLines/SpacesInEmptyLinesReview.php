@@ -35,6 +35,11 @@
     public function process(FileInfo $file, Report $report) {
       $tokens = $this->findTokens($file);
 
+      $lastInvalidToken = $this->getLastInvalidToken($file);
+      if (null !== $lastInvalidToken) {
+        $tokens->append($lastInvalidToken);
+      }
+
       if ($tokens->count() === 0) {
         return;
       }

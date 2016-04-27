@@ -3,7 +3,7 @@
   namespace Funivan\Cs\Tools\SpacesInEmptyLines\Tests;
 
   use Funivan\Cs\FileProcessor\FileTool;
-  use Funivan\Cs\Tools\SpacesInEmptyLines\ReplaceSpacesInEmptyLinesFixer;
+  use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Tests\Funivan\Cs\FixerTestCase;
 
   /**
@@ -38,6 +38,17 @@ echo 2;',
 
 ',
         ],
+        [
+          '<?php
+...
+...
+...',
+          '<?php
+
+
+',
+
+        ],
       ];
     }
 
@@ -59,7 +70,7 @@ echo 2;',
      * @return FileTool
      */
     public function getTool() {
-      return new ReplaceSpacesInEmptyLinesFixer();
+      return new SpacesInEmptyLinesFixer();
     }
 
   }
