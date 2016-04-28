@@ -24,4 +24,4 @@
 
 
 ## Todo
-Create configuration
+Write documentation for configuration

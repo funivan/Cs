@@ -34,9 +34,15 @@
 
       $newTag = $this->useShortTags() ? '<?' : '<?php';
       foreach ($tags as $tag) {
+
         $spaces = preg_replace('!^(\S+)(\s)!', '$2', $tag->getValue());
+        if ($spaces === $tag->getValue()) {
+          $spaces = '';
+        }
+
         $tag->setValue($newTag . $spaces);
       }
+
     }
 
   }

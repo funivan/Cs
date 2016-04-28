@@ -25,6 +25,6 @@
 ## Review
   Find empty lines with spaces
 
-  Name: `replace_spaces_in_empty_lines_review`
+  Name: `spaces_in_empty_lines_review`
 
   * _No configuration required_

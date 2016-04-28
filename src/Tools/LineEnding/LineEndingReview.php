@@ -10,7 +10,7 @@
    */
   class LineEndingReview extends LineEndingAbstract {
 
-    const NAME = 'php_line_ending_review';
+    const NAME = 'line_ending_review';
 
 
     /**

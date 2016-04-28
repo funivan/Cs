@@ -12,10 +12,6 @@
    */
   abstract class PhpOpenTagsAbstract implements FileTool {
 
-    const TAG_FORMAT_FULL = 1;
-
-    const TAG_FORMAT_SHORT = 2;
-
     /**
      * @var null
      */
@@ -26,10 +22,7 @@
      * @param int|null $tagFormat
      */
     public function __construct($tagFormat = null) {
-      // Use short tags by default
-      $tagFormat = $tagFormat ? $tagFormat : self::TAG_FORMAT_SHORT;
-
-      if ($tagFormat !== self::TAG_FORMAT_FULL and $tagFormat !== self::TAG_FORMAT_SHORT) {
+      if (!PhpOpenTagsConfiguration::isValidTagFormat($tagFormat)) {
         throw new \InvalidArgumentException('Invalid tag format');
       }
 
@@ -41,7 +34,8 @@
      * @return string
      */
     public function getDescription() {
-      return 'Use only one type of php tags according to your code style';
+      $type = $this->useFullTags() ? 'full' : 'short';
+      return 'Use only ' . $type . ' php tags according to your code style';
     }
 
 
@@ -58,7 +52,7 @@
      * @return bool
      */
     protected function useFullTags() {
-      return $this->tagFormat === self::TAG_FORMAT_FULL;
+      return $this->tagFormat === PhpOpenTagsConfiguration::TAG_FORMAT_FULL;
     }
 
 
@@ -66,7 +60,7 @@
      * @return bool
      */
     protected function useShortTags() {
-      return $this->tagFormat === self::TAG_FORMAT_SHORT;
+      return $this->tagFormat === PhpOpenTagsConfiguration::TAG_FORMAT_SHORT;
     }
 
 

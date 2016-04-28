@@ -29,11 +29,11 @@
       if ($tags->count() === 0) {
         return;
       }
-      if ($this->useShortTags()) {
-        $message = 'You should use only short php tags';
-      } else {
-        $message = 'You should not only full php tags';
-      }
+
+      $type = $this->useFullTags() ? 'full' : 'short';
+
+      $message = 'You should use only ' . $type . ' php tags';
+
 
       foreach ($tags as $tag) {
         $report->addError($file, $this, $message, $tag->getLine());

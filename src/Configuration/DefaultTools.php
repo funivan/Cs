@@ -12,8 +12,7 @@
   use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsConfiguration;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
 
@@ -23,33 +22,35 @@
   final class DefaultTools {
 
     /**
-     * @return array Array<String,String>
+     * @return ToolConfiguration[]
      */
-    public static function getFixTools() {
+    public static function getFixers() {
       return [
-        LineEndingFixer::NAME => LineEndingFixer::class,
-        LineAfterOpenTagFixer::NAME_FIXER => LineAfterOpenTagFixer::class,
-        PhpOpenTagsFixer::NAME => PhpOpenTagsFixer::class,
-        SpacesInEmptyLinesFixer::NAME => SpacesInEmptyLinesFixer::class,
-        LineBeforeClassEndFixer::NAME => LineBeforeClassEndFixer::class,
+        new ToolConfiguration(LineEndingFixer::NAME, LineEndingFixer::class),
+        new ToolConfiguration(LineAfterOpenTagFixer::NAME_FIXER, LineAfterOpenTagFixer::class),
+        new ToolConfiguration(SpacesInEmptyLinesFixer::NAME, SpacesInEmptyLinesFixer::class),
+        new ToolConfiguration(LineBeforeClassEndFixer::NAME, LineBeforeClassEndFixer::class),
+
+        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_FULL, PhpOpenTagsConfiguration::FIXER),
       ];
     }
 
 
     /**
-     * @return array Array<String,String>
+     * @return ToolConfiguration[]
      */
-    public static function getReviewTools() {
+    public static function getReviews() {
       return [
-        LineEndingReview::NAME => LineEndingReview::class,
-        LineBeforeClassEndReview::NAME => LineBeforeClassEndReview::class,
-        PhpFileStartReview::NAME => PhpFileStartReview::class,
-        PhpSyntaxCheckReview::NAME => PhpSyntaxCheckReview::class,
-        PhpFileCloseTagReview::NAME => PhpFileCloseTagReview::class,
-        SpacesInEmptyLinesReview::NAME => SpacesInEmptyLinesReview::class,
-        ComposerReview::NAME => ComposerReview::class,
-        LineAfterOpenTagReview::NAME => LineAfterOpenTagReview::class,
-        PhpOpenTagsReview::NAME => PhpOpenTagsReview::class,
+        new ToolConfiguration(LineEndingReview::NAME, LineEndingReview::class),
+        new ToolConfiguration(LineBeforeClassEndReview::NAME, LineBeforeClassEndReview::class),
+        new ToolConfiguration(PhpFileStartReview::NAME, PhpFileStartReview::class),
+        new ToolConfiguration(PhpSyntaxCheckReview::NAME, PhpSyntaxCheckReview::class),
+        new ToolConfiguration(PhpFileCloseTagReview::NAME, PhpFileCloseTagReview::class),
+        new ToolConfiguration(SpacesInEmptyLinesReview::NAME, SpacesInEmptyLinesReview::class),
+        new ToolConfiguration(ComposerReview::NAME, ComposerReview::class),
+        new ToolConfiguration(LineAfterOpenTagReview::NAME, LineAfterOpenTagReview::class),
+
+        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_FULL, PhpOpenTagsConfiguration::REVIEW),
       ];
     }
 

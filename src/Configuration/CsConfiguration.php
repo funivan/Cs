@@ -16,7 +16,7 @@
     private $fileFinderFactory = null;
 
     /**
-     * @var array
+     * @var ToolConfigurationInterface[]
      */
     private $toolsConfiguration = [];
 
@@ -25,7 +25,7 @@
      * @return CsConfiguration
      */
     public static function createFixerConfiguration() {
-      return self::createWithTools(DefaultTools::getFixTools());
+      return (new CsConfiguration())->addToolsConfigurations(DefaultTools::getFixers());
     }
 
 
@@ -33,23 +33,7 @@
      * @return CsConfiguration
      */
     public static function createReviewConfiguration() {
-      return self::createWithTools(DefaultTools::getReviewTools());
-    }
-
-
-    /**
-     * @param array $tools
-     * @return CsConfiguration
-     */
-    private static function createWithTools($tools) {
-      $configuration = new CsConfiguration();
-      foreach ($tools as $name => $class) {
-        $configuration->addToolConfiguration(
-          new ToolConfiguration($name, $class)
-        );
-      }
-
-      return $configuration;
+      return (new CsConfiguration())->addToolsConfigurations(DefaultTools::getReviews());
     }
 
 
@@ -84,6 +68,18 @@
 
 
     /**
+     * @param ToolConfigurationInterface[] $toolsConfigurations
+     * @return $this
+     */
+    public function addToolsConfigurations(array $toolsConfigurations) {
+      foreach ($toolsConfigurations as $toolConfig) {
+        $this->addToolConfiguration($toolConfig);
+      }
+      return $this;
+    }
+
+
+    /**
      * @param ToolConfigurationInterface $toolConfiguration
      * @return $this
      */
@@ -95,6 +91,18 @@
 
       $this->toolsConfiguration[$name] = $toolConfiguration;
       return $this;
+    }
+
+
+    /**
+     * @param string $name
+     * @return ToolConfigurationInterface|null
+     */
+    public function getToolConfiguration($name) {
+      if (isset($this->toolsConfiguration[$name])) {
+        return $this->toolsConfiguration[$name];
+      }
+      return null;
     }
 
   }

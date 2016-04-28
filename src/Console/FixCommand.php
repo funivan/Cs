@@ -42,7 +42,7 @@
       foreach ($report as $message) {
         $output->write('<info>');
         $output->writeln('file    : ' . $message->getFile()->getPath() . ':' . $message->getLine());
-        $output->writeln('toolConfig    : ' . $message->getToolName());
+        $output->writeln('tool    : ' . $message->getToolName());
         if ($isVerbose) {
           $output->writeln('info    : ' . $message->getTool()->getDescription());
         }
