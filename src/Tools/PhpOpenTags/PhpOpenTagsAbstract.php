@@ -1,15 +1,16 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\PhpOpenTags;
+  namespace Funivan\Cs\Tools\PhpOpenTags;
 
   use Funivan\Cs\FileFinder\FileInfo;
+  use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\PhpTokenizer\Query\Query;
 
   /**
    *
    */
-  abstract class AbstractPhpOpenTags implements FileTool {
+  abstract class PhpOpenTagsAbstract implements FileTool {
 
     const TAG_FORMAT_FULL = 1;
 
@@ -20,14 +21,6 @@
      */
     private $tagFormat = null;
 
-    /**
-     * @var array
-     */
-    protected static $tagsMap = [
-      self::TAG_FORMAT_FULL => 'full',
-      self::TAG_FORMAT_SHORT => 'short',
-    ];
-
 
     /**
      * @param int|null $tagFormat
@@ -36,7 +29,7 @@
       // Use short tags by default
       $tagFormat = $tagFormat ? $tagFormat : self::TAG_FORMAT_SHORT;
 
-      if (!isset(static::$tagsMap[$tagFormat])) {
+      if ($tagFormat !== self::TAG_FORMAT_FULL and $tagFormat !== self::TAG_FORMAT_SHORT) {
         throw new \InvalidArgumentException('Invalid tag format');
       }
 
@@ -57,11 +50,7 @@
      * @return boolean
      */
     public function canProcess(FileInfo $file) {
-      if ($file->getStatus() === FileInfo::STATUS_DELETED) {
-        return false;
-      }
-
-      return (in_array($file->getExtension(), ['php', 'html']));
+      return (new CanProcessHelper())->notDeleted()->extension(['php', 'html'])->isValid($file);
     }
 
 
@@ -69,7 +58,7 @@
      * @return bool
      */
     protected function useFullTags() {
-      return $this->tagFormat == self::TAG_FORMAT_FULL;
+      return $this->tagFormat === self::TAG_FORMAT_FULL;
     }
 
 
@@ -77,7 +66,7 @@
      * @return bool
      */
     protected function useShortTags() {
-      return $this->tagFormat == self::TAG_FORMAT_SHORT;
+      return $this->tagFormat === self::TAG_FORMAT_SHORT;
     }
 
 
@@ -91,10 +80,11 @@
       if ($this->useShortTags()) {
         $query->valueLike('!^<\?php\s+!'); // long php tag contains also spaces
       } else {
-        $query->valueIs('<?php');
+        $query->valueIs('<?');
       }
 
       $tokens = $file->getTokenizer()->getCollection();
+
 
       return $tokens->find($query);
     }

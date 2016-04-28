@@ -10,10 +10,10 @@
   use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
   use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagFixer;
   use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagReview;
-  use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsFixer;
-  use Funivan\Cs\ToolBag\PhpOpenTags\PhpOpenTagsReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
 

@@ -12,13 +12,13 @@
 ...echo 1;\n
 ...\n
 ...echo 2;\n
-  ````
+  ```
   *After*:
   ```
 ...echo 1;\n
 \n
 ...echo 2;\n
-  ````
+  ```
 
   * _No configuration required_
 

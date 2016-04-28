@@ -1,15 +1,14 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\PhpOpenTags;
+  namespace Funivan\Cs\Tools\PhpOpenTags;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\Message\Report;
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpOpenTagsFixer extends AbstractPhpOpenTags {
+  class PhpOpenTagsFixer extends PhpOpenTagsAbstract {
 
     const NAME = 'php_open_tags_fixer';
 
@@ -33,8 +32,7 @@
 
       $report->addNotice($file, $this, 'Find invalid open tags: ' . $tags->count());
 
-
-      $newTag = $this->useShortTags() ? '<?php' : '<?php';
+      $newTag = $this->useShortTags() ? '<?' : '<?php';
       foreach ($tags as $tag) {
         $spaces = preg_replace('!^(\S+)(\s)!', '$2', $tag->getValue());
         $tag->setValue($newTag . $spaces);

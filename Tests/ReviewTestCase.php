@@ -45,4 +45,18 @@
       return $report;
     }
 
+
+    /**
+     * @param Report $report
+     * @param array $expectErrorLines
+     */
+    protected function assertInvalidLinesInReport(Report $report, array $expectErrorLines) {
+      $errorLines = [];
+      foreach ($report as $message) {
+        $errorLines[] = $message->getLine();
+      }
+
+      $this->assertEquals($expectErrorLines, $errorLines);
+    }
+
   }

@@ -65,12 +65,8 @@
       $input = strtr($input, $map);
 
       $report = $this->process($input);
-      $errorLines = [];
-      foreach ($report as $message) {
-        $errorLines[] = $message->getLine();
-      }
-
-      $this->assertEquals($expectErrorLines, $errorLines);
+      $this->assertInvalidLinesInReport($report, $expectErrorLines);
     }
+
 
   }

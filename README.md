@@ -9,6 +9,16 @@
 
 Perform code fix and review
 
+
+## Tools list
+
+| Fixer | Review | Link                                                                             |
+|:-----:|:------:|:---------------------------------------------------------------------------------|
+| ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
+| ✔     | ✔      | [PhpOpenTags](src/Tools/PhpOpenTags/README.md)                                   |
+| ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
+                                                                                              
+
 ## Install
 
 Via Composer

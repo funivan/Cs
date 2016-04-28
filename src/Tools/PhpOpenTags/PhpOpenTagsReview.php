@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\PhpOpenTags;
+  namespace Funivan\Cs\Tools\PhpOpenTags;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\Message\Report;
@@ -8,7 +8,7 @@
   /**
    *
    */
-  class PhpOpenTagsReview extends AbstractPhpOpenTags {
+  class PhpOpenTagsReview extends PhpOpenTagsAbstract {
 
     const NAME = 'php_open_tags_review';
 
@@ -29,14 +29,16 @@
       if ($tags->count() === 0) {
         return;
       }
-
-      $message = 'Find invalid open tags (' . $tags->count() . ').';
       if ($this->useShortTags()) {
-        $message = $message . ' You should use only short php tags';
+        $message = 'You should use only short php tags';
       } else {
-        $message = $message . ' You should not use short php tags. Only full php tags allowed';
+        $message = 'You should not only full php tags';
       }
-      $report->addError($file, $this, $message);
+
+      foreach ($tags as $tag) {
+        $report->addError($file, $this, $message, $tag->getLine());
+      }
+
     }
 
   }

@@ -10,15 +10,13 @@
 ...echo 1;\r\n
 ...\r\n
 ...echo 2;\r\n
-  ````
+  ```
   *After*:
   ```
 ...echo 1;\n
 \n
 ...echo 2;\n
-  ````
-
-  @todo create configuration
+  ```
 
 ## Review
   Find lines with invalid line ending symbol
