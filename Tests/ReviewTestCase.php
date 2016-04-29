@@ -11,17 +11,13 @@
    */
   abstract class ReviewTestCase extends \PHPUnit_Framework_TestCase {
 
-    /**
-     * @return FileTool
-     */
-    public abstract function getTool();
-
 
     /**
+     * @param FileTool $tool
      * @param string $input
      * @return Report
      */
-    protected function process($input) {
+    protected function process(FileTool $tool, $input) {
       $path = tempnam(sys_get_temp_dir(), 'review-test');
       file_put_contents($path, $input);
 
@@ -30,9 +26,6 @@
       unlink($path);
 
       $this->assertNotEmpty($tokenizer);
-
-      $tool = $this->getTool();
-
 
       $report = new Report();
       $tool->process($file, $report);

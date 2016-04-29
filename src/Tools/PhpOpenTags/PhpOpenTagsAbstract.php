@@ -34,7 +34,7 @@
      * @return string
      */
     public function getDescription() {
-      $type = $this->useFullTags() ? 'full' : 'short';
+      $type = $this->useFullTags() ? 'long' : 'short';
       return 'Use only ' . $type . ' php tags according to your code style';
     }
 
@@ -52,7 +52,7 @@
      * @return bool
      */
     protected function useFullTags() {
-      return $this->tagFormat === PhpOpenTagsConfiguration::TAG_FORMAT_FULL;
+      return $this->tagFormat === PhpOpenTagsConfiguration::TAG_FORMAT_LONG;
     }
 
 

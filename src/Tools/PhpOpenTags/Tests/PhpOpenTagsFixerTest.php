@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags\Tests;
 
-  use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsConfiguration;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
   use Tests\Funivan\Cs\FixerTestCase;
 
@@ -11,13 +11,6 @@
    */
   class PhpOpenTagsFixerTest extends FixerTestCase {
 
-    /**
-     * @return FileTool
-     */
-    public function getTool() {
-      return new PhpOpenTagsFixer();
-    }
-
 
     /**
      * @return array
@@ -25,16 +18,19 @@
     public function getConvertTagsDataProvider() {
       return [
         [
+          PhpOpenTagsConfiguration::TAG_FORMAT_SHORT,
           '<?php
 ?><?',
           '<?
 ?><?',
         ],
         [
+          PhpOpenTagsConfiguration::TAG_FORMAT_SHORT,
           '<?php echo 1',
           '<? echo 1',
         ],
         [
+          PhpOpenTagsConfiguration::TAG_FORMAT_SHORT,
           '<?php
 echo 1',
           '<?
@@ -47,11 +43,12 @@ echo 1',
 
     /**
      * @dataProvider getConvertTagsDataProvider
+     * @param int $tagFormat
      * @param string $input
      * @param string $expect
      */
-    public function testConvertTags($input, $expect) {
-      $this->process($input, $expect);
+    public function testConvertTags($tagFormat, $input, $expect) {
+      $this->process(new PhpOpenTagsFixer($tagFormat), $input, $expect);
     }
 
   }

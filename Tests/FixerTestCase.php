@@ -12,26 +12,22 @@
   abstract class FixerTestCase extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @return FileTool
-     */
-    public abstract function getTool();
-
-
-    /**
+     * @param FileTool $tool
      * @param string $input
      * @param string $expect
      */
-    public function process($input, $expect) {
-      $output = $this->convert($input);
+    public function process(FileTool $tool, $input, $expect) {
+      $output = $this->convert($tool, $input);
       $this->assertEquals($expect, $output);
     }
 
 
     /**
+     * @param FileTool $tool
      * @param string $input
      * @return string
      */
-    protected function convert($input) {
+    protected function convert(FileTool $tool, $input) {
       $path = tempnam(sys_get_temp_dir(), 'fix-test');
       file_put_contents($path, $input);
 
@@ -41,11 +37,9 @@
 
       $this->assertNotEmpty($tokenizer);
 
-      $this->getTool()->process($file, new Report());
+      $tool->process($file, new Report());
 
-
-      $output = $tokenizer->getCollection()->assemble();
-      return $output;
+      return $tokenizer->getCollection()->assemble();
     }
 
   }

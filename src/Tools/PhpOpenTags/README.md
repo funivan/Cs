@@ -23,5 +23,29 @@
 
 
 
-## Todo
-Write documentation for configuration
+## Configuration
+You can configure type of php tags that you want to use. 
+There are 2 types of tags:
+    - long `<?php`
+    - short `<?`
+    
+With configuration class `PhpOpenTagsConfiguration` you can configure `review` and `fixer`
+
+```php
+    use Funivan\Cs\Tools\PhpOpenTags;
+    
+    // Configure fixer
+    new PhpOpenTagsConfiguration(
+        PhpOpenTagsConfiguration::TAG_FORMAT_LONG, // specify tag format  
+        PhpOpenTagsConfiguration::FIXER // specify whitch tool do you want to use
+    );
+    
+    // Configure review
+    new PhpOpenTagsConfiguration(
+            PhpOpenTagsConfiguration::TAG_FORMAT_LONG,  
+            PhpOpenTagsConfiguration::REVIEW 
+    );
+
+
+```
+     

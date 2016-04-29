@@ -1,7 +1,11 @@
 # Line ending
+  `LF` - Line Feed `\n`
+  `CR` - Carriage Return `\r`
+  `CRLF` - `\r\n`
+
 
 ## Fixer
-  Replace invalid line endings
+  Invalid line endings `CRLF` and `CR` will be replaced with `LF`
 
   Name: `line_ending_fixer`
 
@@ -19,11 +23,8 @@
   ```
 
 ## Review
-  Find lines with invalid line ending symbol
-
+  Find `CRLF` and `CR` line ending
   Name: `line_ending_review`
-
-
 
 ## Todo
 Create configuration

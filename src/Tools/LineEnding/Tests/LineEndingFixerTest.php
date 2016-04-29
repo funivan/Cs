@@ -2,7 +2,6 @@
 
   namespace Funivan\Cs\Tools\LineEnding\Tests;
 
-  use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Tests\Funivan\Cs\FixerTestCase;
 
@@ -64,19 +63,11 @@
       $expect = str_replace("\n", '', $expect);
       $input = strtr($input, $map);
 
-      $output = $this->convert($input);
+      $output = $this->convert(new LineEndingFixer(), $input);
 
       $output = strtr($output, array_flip($map));
       $this->assertEquals($expect, $output);
 
-    }
-
-
-    /**
-     * @return FileTool
-     */
-    public function getTool() {
-      return new LineEndingFixer();
     }
 
   }

@@ -2,7 +2,6 @@
 
   namespace Funivan\Cs\Tools\SpacesInEmptyLines\Tests;
 
-  use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Tests\Funivan\Cs\FixerTestCase;
 
@@ -62,15 +61,8 @@ echo 2;',
       $input = str_replace('.', ' ', $input);
       $expect = str_replace('.', ' ', $expect);
 
-      $this->process($input, $expect);
+      $this->process(new SpacesInEmptyLinesFixer(), $input, $expect);
     }
 
-
-    /**
-     * @return FileTool
-     */
-    public function getTool() {
-      return new SpacesInEmptyLinesFixer();
-    }
 
   }

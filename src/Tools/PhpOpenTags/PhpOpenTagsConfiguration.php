@@ -14,7 +14,7 @@
 
     const REVIEW = 'review';
 
-    const TAG_FORMAT_FULL = 1;
+    const TAG_FORMAT_LONG = 1;
 
     const TAG_FORMAT_SHORT = 2;
 
@@ -49,7 +49,7 @@
      * @return bool
      */
     public static function isValidTagFormat($tagFormat) {
-      return ($tagFormat === self::TAG_FORMAT_FULL or $tagFormat === self::TAG_FORMAT_SHORT);
+      return ($tagFormat === self::TAG_FORMAT_LONG or $tagFormat === self::TAG_FORMAT_SHORT);
     }
 
 

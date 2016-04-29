@@ -30,7 +30,7 @@
         return;
       }
 
-      $type = $this->useFullTags() ? 'full' : 'short';
+      $type = $this->useFullTags() ? 'long' : 'short';
 
       $message = 'You should use only ' . $type . ' php tags';
 

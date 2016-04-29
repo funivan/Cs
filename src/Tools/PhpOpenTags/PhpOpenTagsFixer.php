@@ -30,10 +30,14 @@
         return;
       }
 
-      $report->addNotice($file, $this, 'Find invalid open tags: ' . $tags->count());
+
+      $type = $this->useFullTags() ? 'long' : 'short';
+      $message = 'Detect ' . $type . ' php tag';
+
 
       $newTag = $this->useShortTags() ? '<?' : '<?php';
       foreach ($tags as $tag) {
+        $report->addNotice($file, $this, $message, $tag->getLine());
 
         $spaces = preg_replace('!^(\S+)(\s)!', '$2', $tag->getValue());
         if ($spaces === $tag->getValue()) {

@@ -31,7 +31,7 @@
         new ToolConfiguration(SpacesInEmptyLinesFixer::NAME, SpacesInEmptyLinesFixer::class),
         new ToolConfiguration(LineBeforeClassEndFixer::NAME, LineBeforeClassEndFixer::class),
 
-        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_FULL, PhpOpenTagsConfiguration::FIXER),
+        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_LONG, PhpOpenTagsConfiguration::FIXER),
       ];
     }
 
@@ -50,7 +50,7 @@
         new ToolConfiguration(ComposerReview::NAME, ComposerReview::class),
         new ToolConfiguration(LineAfterOpenTagReview::NAME, LineAfterOpenTagReview::class),
 
-        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_FULL, PhpOpenTagsConfiguration::REVIEW),
+        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_LONG, PhpOpenTagsConfiguration::REVIEW),
       ];
     }
 

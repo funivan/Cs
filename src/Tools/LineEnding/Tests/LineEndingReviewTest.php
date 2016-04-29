@@ -2,7 +2,6 @@
 
   namespace Funivan\Cs\Tools\Tests\LineEnding;
 
-  use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
   use Tests\Funivan\Cs\ReviewTestCase;
 
@@ -10,13 +9,6 @@
    *
    */
   class LineEndingReviewTest extends ReviewTestCase {
-
-    /**
-     * @return FileTool
-     */
-    public function getTool() {
-      return new LineEndingReview();
-    }
 
 
     /**
@@ -64,7 +56,8 @@
       $input = str_replace("\n", '', $input);
       $input = strtr($input, $map);
 
-      $report = $this->process($input);
+
+      $report = $this->process(new LineEndingReview(), $input);
       $this->assertInvalidLinesInReport($report, $expectErrorLines);
     }
 
