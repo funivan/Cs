@@ -39,6 +39,7 @@ echo 1;?>
 
 ',
           [4],
+          'process' => ini_get('short_open_tag'),
         ],
       ];
     }
@@ -48,9 +49,13 @@ echo 1;?>
      * @dataProvider getLineAfterOpenTagDataProvider
      * @param string $input
      * @param array $errorLines
+     * @param bool $process
      */
-    public function testLineAfterOpenTag($input, array $errorLines) {
-
+    public function testLineAfterOpenTag($input, array $errorLines, $process = true) {
+      if ($process === false) {
+        $this->markTestSkipped('PHP short open tags are not enabled.');
+        return;
+      }
       $tool = new LineAfterOpenTagReview();
       $report = $this->process($tool, $input);
       $this->assertInvalidLinesInReport($report, $errorLines);

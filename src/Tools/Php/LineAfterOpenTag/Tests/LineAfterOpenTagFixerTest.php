@@ -31,6 +31,7 @@ echo 1;',
           '<?
 
  echo 1;',
+          'process' => ini_get('short_open_tag'),
         ],
         [
           '<?php echo 1;',
@@ -53,8 +54,13 @@ echo 1;',
      * @dataProvider getSetEmptyLineDataProvider
      * @param string $input
      * @param string $expect
+     * @param bool $process
      */
-    public function testSetEmptyLine($input, $expect) {
+    public function testSetEmptyLine($input, $expect, $process = true) {
+      if ($process === false) {
+        $this->markTestSkipped('PHP short open tags are not enabled.');
+        return;
+      }
       $this->process(new LineAfterOpenTagFixer(), $input, $expect);
     }
 

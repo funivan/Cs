@@ -28,6 +28,7 @@
           '<?
           echo 1',
           [1],
+          'process' => ini_get('short_open_tag'),
         ],
         [
           PhpOpenTagsConfiguration::TAG_FORMAT_LONG,
@@ -38,6 +39,7 @@
           <?
           ',
           [3, 5],
+          'process' => ini_get('short_open_tag'),
         ],
 
         [
@@ -69,8 +71,13 @@ echo 1?>
      * @param int $tagType
      * @param string $input
      * @param array $expectErrorLines
+     * @param bool $process
      */
-    public function testInvalidOpenTags($tagType, $input, array $expectErrorLines) {
+    public function testInvalidOpenTags($tagType, $input, array $expectErrorLines, $process = true) {
+      if ($process===false) {
+        $this->markTestSkipped('PHP short open tags are not enabled.');
+        return;
+      }
       $tool = new PhpOpenTagsReview($tagType);
       $report = $this->process($tool, $input);
       $this->assertInvalidLinesInReport($report, $expectErrorLines);
