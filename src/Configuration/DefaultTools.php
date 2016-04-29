@@ -8,10 +8,10 @@
   use Funivan\Cs\Review\Tools\PhpSyntaxCheckReview;
   use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
   use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
-  use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagFixer;
-  use Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter\LineAfterOpenTagReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
+  use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;
+  use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsConfiguration;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;

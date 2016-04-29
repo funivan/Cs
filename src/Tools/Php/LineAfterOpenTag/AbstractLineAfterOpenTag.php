@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter;
+  namespace Funivan\Cs\Tools\Php\LineAfterOpenTag;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\FileProcessor\CanProcessHelper;
@@ -9,7 +9,7 @@
   /**
    *
    */
-  abstract class LineAfterOpenTag implements FileTool {
+  abstract class AbstractLineAfterOpenTag implements FileTool {
 
     /**
      * @return string* @inheritdoc
@@ -21,12 +21,12 @@
 
     /**
      * @param FileInfo $file
-     * @return array Array<Array<Int, Token>>
+     * @return LineTokenData[]
      */
     protected function getInvalidStartTokens(FileInfo $file) {
       $collection = $file->getTokenizer()->getCollection();
 
-      $tokens = [];
+      $data = [];
 
 
       foreach ($collection as $tag) {
@@ -34,19 +34,23 @@
           continue;
         }
 
-        if ($tag->getValue() === '<?') {
-          $emptyLines = explode("\n", $collection->getNext()->getValue());
-        } else {
-          $emptyLines = explode("\n", $tag->getValue());
+
+        $value = $tag->getValue();
+        $next = $collection->getNext();
+        $whitespaceToken = null;
+        if ($next->getType() === T_WHITESPACE) {
+          $value = $next->getValue();
+          $whitespaceToken = $next;
         }
 
-        $num = count($emptyLines);
-        if ($num <= 2) {
-          $tokens[] = [$num, $tag];
+
+        $num = count(explode("\n", $value));
+        if ($num !== 2) {
+          $data[] = new LineTokenData($num, $tag, $whitespaceToken);
         }
       }
 
-      return $tokens;
+      return $data;
     }
 
   }

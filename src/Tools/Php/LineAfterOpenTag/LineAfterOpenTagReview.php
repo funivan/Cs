@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\PhpOpenTagLineDelimiter;
+  namespace Funivan\Cs\Tools\Php\LineAfterOpenTag;
 
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\Message\Report;
@@ -8,13 +8,16 @@
   /**
    *
    */
-  class LineAfterOpenTagReview extends LineAfterOpenTag {
+  class LineAfterOpenTagReview extends AbstractLineAfterOpenTag {
 
-    const NAME = 'php_open_tag_empty_line_review';
+    const NAME = 'php_line_after_open_tag_review';
 
 
+    /**
+     * @return string
+     */
     public function getDescription() {
-      return 'Expect at least one empty line after php open tag';
+      return 'Expect one empty line after php open tag';
     }
 
 
@@ -36,13 +39,15 @@
      */
     public function process(FileInfo $file, Report $report) {
 
-      $tokens = $this->getInvalidStartTokens($file);
+      $items = $this->getInvalidStartTokens($file);
 
-      if (count($tokens) === 0) {
+      if (count($items) === 0) {
         return;
       }
+      foreach ($items as $lineTokenData) {
+        $report->addError($file, $this, 'Expect at one empty line after php open tag', $lineTokenData->getToken()->getLine());
+      }
 
-      $report->addError($file, $this, 'Expect at least one empty line after php open tag', 0);
     }
 
   }
