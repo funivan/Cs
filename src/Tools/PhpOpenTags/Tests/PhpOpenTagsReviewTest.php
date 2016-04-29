@@ -28,7 +28,7 @@
           '<?
           echo 1',
           [1],
-          'process' => ini_get('short_open_tag'),
+          'process' => (boolean) ini_get('short_open_tag'),
         ],
         [
           PhpOpenTagsConfiguration::TAG_FORMAT_LONG,
@@ -39,7 +39,7 @@
           <?
           ',
           [3, 5],
-          'process' => ini_get('short_open_tag'),
+          'process' => (boolean) ini_get('short_open_tag'),
         ],
 
         [

@@ -31,7 +31,7 @@ echo 1;',
           '<?
 
  echo 1;',
-          'process' => ini_get('short_open_tag'),
+          'process' => (boolean) ini_get('short_open_tag'),
         ],
         [
           '<?php echo 1;',

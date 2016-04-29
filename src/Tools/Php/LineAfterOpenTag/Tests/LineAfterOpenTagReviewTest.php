@@ -39,7 +39,7 @@ echo 1;?>
 
 ',
           [4],
-          'process' => ini_get('short_open_tag'),
+          'process' => (boolean) ini_get('short_open_tag'),
         ],
       ];
     }
