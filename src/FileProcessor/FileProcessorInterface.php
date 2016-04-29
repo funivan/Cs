@@ -1,4 +1,5 @@
 <?php
+
   namespace Funivan\Cs\FileProcessor;
 
   use Funivan\Cs\FileFinder\FileInfoCollection;
@@ -6,7 +7,6 @@
 
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   interface FileProcessorInterface {

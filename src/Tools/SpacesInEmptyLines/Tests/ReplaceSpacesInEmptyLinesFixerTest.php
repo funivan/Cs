@@ -64,5 +64,4 @@ echo 2;',
       $this->process(new SpacesInEmptyLinesFixer(), $input, $expect);
     }
 
-
   }

@@ -110,4 +110,5 @@
       $this->canProcessCallback = $canProcessCallback;
       return $this;
     }
+
   }

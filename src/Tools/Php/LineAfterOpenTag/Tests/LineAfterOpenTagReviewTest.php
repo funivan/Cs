@@ -56,5 +56,4 @@ echo 1;?>
       $this->assertInvalidLinesInReport($report, $errorLines);
     }
 
-
   }

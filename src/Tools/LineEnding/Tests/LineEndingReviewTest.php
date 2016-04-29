@@ -61,5 +61,4 @@
       $this->assertInvalidLinesInReport($report, $expectErrorLines);
     }
 
-
   }
