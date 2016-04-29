@@ -10,11 +10,6 @@
    */
   class LineAfterOpenTagFixerTest extends FixerTestCase {
 
-    protected function setUp() {
-      ini_set('short_open_tag', true);
-      parent::setUp();
-    }
-
 
     /**
      * @return array

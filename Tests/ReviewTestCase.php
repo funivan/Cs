@@ -11,6 +11,11 @@
    */
   abstract class ReviewTestCase extends \PHPUnit_Framework_TestCase {
 
+    public static function setUpBeforeClass() {
+      parent::setUpBeforeClass();
+      ini_set('short_open_tag', true);
+    }
+
 
     /**
      * @param FileTool $tool
