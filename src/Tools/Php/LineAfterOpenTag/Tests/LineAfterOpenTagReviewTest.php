@@ -41,6 +41,23 @@ echo 1;?>
           [4],
           'process' => (boolean) ini_get('short_open_tag'),
         ],
+        [
+          '<?
+
+echo 1;
+',
+          [],
+          'process' => (boolean) ini_get('short_open_tag'),
+        ],
+        [
+          '<?
+
+
+echo 1;
+',
+          [1],
+          'process' => (boolean) ini_get('short_open_tag'),
+        ],
       ];
     }
 

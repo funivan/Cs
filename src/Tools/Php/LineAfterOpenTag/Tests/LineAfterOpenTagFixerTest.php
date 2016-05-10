@@ -27,13 +27,6 @@ echo 1;',
 
         ],
         [
-          '<? echo 1;',
-          '<?
-
- echo 1;',
-          'process' => (boolean) ini_get('short_open_tag'),
-        ],
-        [
           '<?php echo 1;',
           '<?php 
 
@@ -45,6 +38,39 @@ echo 1;',
           '<?php
 
         echo 1;',
+        ],
+        [
+          '<? echo 1;',
+          '<?
+
+ echo 1;',
+          'process' => (boolean) ini_get('short_open_tag'),
+        ],
+        [
+          '<?
+echo 1;',
+          '<?
+
+echo 1;',
+          'process' => (boolean) ini_get('short_open_tag'),
+        ],
+        [
+          '<?
+echo 1;',
+          '<?
+
+echo 1;',
+          'process' => (boolean) ini_get('short_open_tag'),
+        ],
+        [
+          '<?
+
+
+echo 1;',
+          '<?
+
+echo 1;',
+          'process' => (boolean) ini_get('short_open_tag'),
         ],
       ];
     }

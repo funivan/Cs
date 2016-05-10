@@ -39,15 +39,16 @@
         $next = $collection->getNext();
         $whitespaceToken = null;
         if ($next->getType() === T_WHITESPACE) {
-          $value = $next->getValue();
+          $value = $value . $next->getValue();
           $whitespaceToken = $next;
         }
 
 
         $num = count(explode("\n", $value));
-        if ($num !== 2) {
+        if ($num !== 3) {
           $data[] = new LineTokenData($num, $tag, $whitespaceToken);
         }
+
       }
 
       return $data;
