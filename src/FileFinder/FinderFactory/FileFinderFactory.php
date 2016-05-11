@@ -20,7 +20,7 @@
 
 
     /**
-     * @param null $baseDir
+     * @param string $baseDir
      */
     public function __construct($baseDir) {
       $this->baseDir = $baseDir;
@@ -28,7 +28,7 @@
 
 
     /**
-     * @return null
+     * @return string
      */
     public function getBaseDir() {
       return $this->baseDir;
