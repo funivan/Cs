@@ -10,18 +10,14 @@
    */
   class PhpOpenTagsConfiguration implements ToolConfigurationInterface {
 
-    const FIXER = 'fixer';
-
-    const REVIEW = 'review';
-
     const TAG_FORMAT_LONG = 1;
 
     const TAG_FORMAT_SHORT = 2;
 
     /**
-     * @var int
+     * @var string
      */
-    private $type;
+    private $toolName;
 
     /**
      * @var int
@@ -30,17 +26,17 @@
 
 
     /**
+     * @param string $toolName Tool name
      * @param int $tagFormat
-     * @param string $type
      */
-    public function __construct($tagFormat, $type) {
+    public function __construct($toolName, $tagFormat) {
       $this->setTagFormat($tagFormat);
 
-      if ($type !== self::FIXER and $type !== self::REVIEW) {
-        throw new \InvalidArgumentException('Invalid tool type id');
+      if ($toolName !== PhpOpenTagsFixer::NAME and $toolName !== PhpOpenTagsReview::NAME) {
+        throw new \InvalidArgumentException('Invalid tool name');
       }
 
-      $this->type = $type;
+      $this->toolName = $toolName;
     }
 
 
@@ -57,10 +53,7 @@
      * @return string
      */
     public function getName() {
-      if ($this->type === self::FIXER) {
-        return \Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer::NAME;
-      }
-      return PhpOpenTagsReview::NAME;
+      return $this->toolName;
     }
 
 
@@ -68,7 +61,7 @@
      * @return FileTool
      */
     public function createTool() {
-      if ($this->type === self::FIXER) {
+      if ($this->toolName === PhpOpenTagsFixer::NAME) {
         return new PhpOpenTagsFixer($this->tagFormat);
       }
 

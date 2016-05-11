@@ -13,6 +13,8 @@
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsConfiguration;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
 
@@ -31,7 +33,7 @@
         new ToolConfiguration(SpacesInEmptyLinesFixer::NAME, SpacesInEmptyLinesFixer::class),
         new ToolConfiguration(LineBeforeClassEndFixer::NAME, LineBeforeClassEndFixer::class),
 
-        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_LONG, PhpOpenTagsConfiguration::FIXER),
+        new PhpOpenTagsConfiguration(PhpOpenTagsFixer::NAME, PhpOpenTagsConfiguration::TAG_FORMAT_LONG),
       ];
     }
 
@@ -50,7 +52,7 @@
         new ToolConfiguration(ComposerReview::NAME, ComposerReview::class),
         new ToolConfiguration(LineAfterOpenTagReview::NAME, LineAfterOpenTagReview::class),
 
-        new PhpOpenTagsConfiguration(PhpOpenTagsConfiguration::TAG_FORMAT_LONG, PhpOpenTagsConfiguration::REVIEW),
+        new PhpOpenTagsConfiguration(PhpOpenTagsReview::NAME, PhpOpenTagsConfiguration::TAG_FORMAT_LONG),
       ];
     }
 
