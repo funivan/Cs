@@ -95,6 +95,17 @@
 
 
     /**
+     * @param ToolConfigurationInterface $toolConfiguration
+     * @return $this
+     */
+    public function setToolConfiguration(ToolConfigurationInterface $toolConfiguration) {
+      $name = $toolConfiguration->getName();
+      $this->toolsConfiguration[$name] = $toolConfiguration;
+      return $this;
+    }
+
+
+    /**
      * @param string $name
      * @return ToolConfigurationInterface|null
      */
