@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Review\Tools;
 
   use Funivan\Cs\FileFinder\FileInfo;
+  use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\Cs\Message\Report;
   use Symfony\Component\Process\Process;
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class ComposerReview implements FileTool {
@@ -36,7 +36,7 @@
      * @inheritdoc
      */
     public function canProcess(FileInfo $file) {
-      return ($file->getName() === 'composer.json');
+      return (new CanProcessHelper())->name('!^composer.json$')->isValid($file);
     }
 
 
@@ -63,7 +63,6 @@
       }
 
       $report->addError($file, $this, 'Invalid composer.json file format', $line);
-
     }
 
   }

@@ -11,7 +11,6 @@
   /**
    * @todo create fixer
    *
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class PhpFileCloseTagReview implements FileTool {
@@ -53,7 +52,6 @@
       foreach ($closedTags as $token) {
         $report->addError($file, $this, 'File contains ending tag', $token->getLine());
       }
-
     }
 
   }

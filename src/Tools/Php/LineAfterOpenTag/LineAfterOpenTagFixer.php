@@ -42,9 +42,6 @@
         return;
       }
 
-      //$report->addNotice($file, $this, 'Add empty line after tag');
-
-
       foreach ($items as $tokenInfo) {
         /** @var Token $token */
         $whitespace = $tokenInfo->getWhitespace();
@@ -54,12 +51,9 @@
         $whitespaceValue = $whitespace->getValue() ? $whitespace->getValue() : '';
         $whitespace->remove();
 
-
         preg_match('!([ ]+)$!', $whitespaceValue, $endSpaces);
 
-
         $whitespaceValue = !empty($endSpaces[1]) ? $endSpaces[1] : '';
-
 
         $lines = explode("\n", $tokenValue);
         $tokenValue = reset($lines);

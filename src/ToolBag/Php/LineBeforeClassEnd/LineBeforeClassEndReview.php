@@ -37,8 +37,8 @@
     public function process(FileInfo $file, Report $report) {
       $tokens = $this->getInvalidTokens($file);
 
-      foreach ($tokens as $token1) {
-        $report->addError($file, $this, 'Expect one empty line before class end', $token1->getLine());
+      foreach ($tokens as $token) {
+        $report->addError($file, $this, 'Expect one empty line before class end', $token->getLine());
       }
     }
 
