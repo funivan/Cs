@@ -36,7 +36,7 @@
      * @inheritdoc
      */
     public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->name('!^composer.json$')->isValid($file);
+      return (new CanProcessHelper())->name('!^composer.json$!')->isValid($file);
     }
 
 
