@@ -46,10 +46,6 @@
      */
     private $status;
 
-    /**
-     * @var \Funivan\PhpTokenizer\File
-     */
-    private $tokenizer;
 
     /**
      * @var FileContent
