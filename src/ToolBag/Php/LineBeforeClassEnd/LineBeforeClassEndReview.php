@@ -35,7 +35,8 @@
      * @void
      */
     public function process(FileInfo $file, Report $report) {
-      $tokens = $this->getInvalidTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $tokens = $this->getInvalidTokens($collection);
 
       foreach ($tokens as $token) {
         $report->addError($file, $this, 'Expect one empty line before class end', $token->getLine());

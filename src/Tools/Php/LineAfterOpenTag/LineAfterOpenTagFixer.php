@@ -37,7 +37,8 @@
      */
     public function process(FileInfo $file, Report $report) {
 
-      $items = $this->getInvalidStartTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $items = $this->getInvalidStartTokens($collection);
       if (count($items) === 0) {
         return;
       }
@@ -64,6 +65,8 @@
         $token->setValue($append);
         $report->addNotice($file, $this, 'Set one empty line after php open tag', $token->getValue());
       }
+
+      $file->getContent()->set($collection->assemble());
     }
 
   }

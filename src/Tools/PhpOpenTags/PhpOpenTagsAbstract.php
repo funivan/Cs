@@ -5,6 +5,7 @@
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
 
   /**
@@ -65,10 +66,10 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param \Funivan\PhpTokenizer\Collection $collection
      * @return \Funivan\PhpTokenizer\Collection
      */
-    protected function findTags(FileInfo $file) {
+    protected function findTags(Collection $collection) {
       $query = (new Query());
       $query->typeIs(T_OPEN_TAG);
       if ($this->useShortTags()) {
@@ -77,10 +78,7 @@
         $query->valueIs('<?');
       }
 
-      $tokens = $file->getTokenizer()->getCollection();
-
-
-      return $tokens->find($query);
+      return $collection->find($query);
     }
 
   }

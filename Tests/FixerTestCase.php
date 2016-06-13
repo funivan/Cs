@@ -38,14 +38,12 @@
       file_put_contents($path, $input);
 
       $file = new FileInfo($path, FileInfo::STATUS_UNKNOWN);
-      $tokenizer = $file->getTokenizer();
-      unlink($path);
-
-      $this->assertNotEmpty($tokenizer);
+      self::assertNotEmpty($file->getContent()->get());
+      unlink($path); // content is loaded, we can delete source file
 
       $tool->process($file, new Report());
 
-      return $tokenizer->getCollection()->assemble();
+      return $file->getContent()->get();
     }
 
   }

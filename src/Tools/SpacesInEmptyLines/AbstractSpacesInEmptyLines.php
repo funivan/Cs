@@ -5,6 +5,7 @@
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
   use Funivan\PhpTokenizer\Token;
 
@@ -24,26 +25,24 @@
 
 
     /**
-     * @param FileInfo $file
-     * @return \Funivan\PhpTokenizer\Collection
+     * @param Collection $collection
+     * @return Collection
      */
-    protected function findTokens(FileInfo $file) {
-      $tokens = $file->getTokenizer()->getCollection();
-
+    protected function findTokens(Collection $collection) {
       $query = new Query();
       $query->valueLike('!\n[ ]+\n!');
       $query->typeIs(T_WHITESPACE);
 
-      return $tokens->find($query);
+      return $collection->find($query);
     }
 
 
     /**
-     * @param FileInfo $file
+     * @param Collection $collection
      * @return Token
      */
-    protected function getLastInvalidToken(FileInfo $file) {
-      $lastToken = $file->getTokenizer()->getCollection()->getLast();
+    protected function getLastInvalidToken(Collection $collection) {
+      $lastToken = $collection->getLast();
       if (preg_match('![ ]+\n*$!', $lastToken->getValue())) {
         return $lastToken;
       }

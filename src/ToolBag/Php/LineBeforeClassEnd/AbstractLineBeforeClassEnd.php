@@ -25,11 +25,11 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param Collection $collection
      * @return Collection
      */
-    protected function getInvalidTokens(FileInfo $file) {
-      $collection = $file->getTokenizer()->getCollection();
+    protected function getInvalidTokens(Collection $collection) {
+
 
       $resultCollection = new Collection();
       $classBody = (new Pattern($collection))->apply(new ClassPattern())->getCollections();

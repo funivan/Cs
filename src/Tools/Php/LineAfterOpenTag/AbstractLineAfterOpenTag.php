@@ -5,6 +5,7 @@
   use Funivan\Cs\FileFinder\FileInfo;
   use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\PhpTokenizer\Collection;
 
   /**
    *
@@ -20,11 +21,11 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param Collection $collection
      * @return LineTokenData[]
      */
-    protected function getInvalidStartTokens(FileInfo $file) {
-      $collection = $file->getTokenizer()->getCollection();
+    protected function getInvalidStartTokens(Collection $collection) {
+
 
       $data = [];
 

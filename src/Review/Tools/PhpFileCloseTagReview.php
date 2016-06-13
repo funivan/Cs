@@ -6,6 +6,7 @@
   use Funivan\Cs\FileProcessor\CanProcessHelper;
   use Funivan\Cs\FileProcessor\FileTool;
   use Funivan\Cs\Message\Report;
+  use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
 
   /**
@@ -47,7 +48,7 @@
      */
     public function process(FileInfo $file, Report $report) {
 
-      $tokens = $file->getTokenizer()->getCollection();
+      $tokens = Collection::createFromString($file->getContent()->get());
       $closedTags = $tokens->find((new Query())->valueIs('?>'));
       foreach ($closedTags as $token) {
         $report->addError($file, $this, 'File contains ending tag', $token->getLine());

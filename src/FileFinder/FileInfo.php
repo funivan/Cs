@@ -3,7 +3,6 @@
   namespace Funivan\Cs\FileFinder;
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class FileInfo {
@@ -51,6 +50,11 @@
      * @var \Funivan\PhpTokenizer\File
      */
     private $tokenizer;
+
+    /**
+     * @var FileContent
+     */
+    private $content;
 
 
     /**
@@ -102,6 +106,8 @@
 
 
     /**
+     * Return empty mime type on deleted file
+     *
      * @return string
      */
     public function getMimeType() {
@@ -121,14 +127,29 @@
 
 
     /**
-     * @return \Funivan\PhpTokenizer\File
+     * @return FileContent
      */
-    public function getTokenizer() {
-      if (empty($this->tokenizer)) {
-        $this->tokenizer = new \Funivan\PhpTokenizer\File($this->getPath());
+    public function getContent() {
+
+      if ($this->content === null) {
+        $this->content = new FileContent(file_get_contents($this->path));
       }
 
-      return $this->tokenizer;
+      return $this->content;
     }
+
+
+    /**
+     * Save content to the file
+     * Perform this action only if content was changed
+     * @void
+     */
+    public function save() {
+      $content = $this->getContent();
+      if ($content->isChanged()) {
+        file_put_contents($this->path, $content->get());
+      }
+    }
+
 
   }

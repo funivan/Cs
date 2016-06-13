@@ -24,6 +24,11 @@
 
     const REGEX = '!\r\n?!';
 
+    /**
+     * @var Query
+     */
+    private $query;
+
 
     /**
      * @codeCoverageIgnore
@@ -45,18 +50,29 @@
 
 
     /**
+     * @return Query
+     */
+    protected function getFindQuery() {
+      if ($this->query !== null) {
+        return $this->query;
+      }
+
+      $this->query = new Query();
+      $this->query->custom(function (Token $token) {
+        return (boolean) preg_match(LineEndingAbstract::REGEX, $token->getValue());
+      });
+
+      return $this->query;
+    }
+
+
+    /**
      * @param FileInfo $file
      * @return \Funivan\PhpTokenizer\Collection
      */
     protected function getInvalidStartTokens(FileInfo $file) {
-
-      $collection = $file->getTokenizer()->getCollection();
-      $query = new Query();
-      $query->custom(function (Token $token) {
-        return (boolean) preg_match(LineEndingAbstract::REGEX, $token->getValue());
-      });
-
-      return $collection->find($query);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      return $collection->find($this->getFindQuery());
     }
 
   }

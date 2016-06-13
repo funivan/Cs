@@ -25,7 +25,8 @@
      * @inheritdoc
      */
     public function process(FileInfo $file, Report $report) {
-      $tags = $this->findTags($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $tags = $this->findTags($collection);
       if ($tags->count() === 0) {
         return;
       }
@@ -47,6 +48,7 @@
         $tag->setValue($newTag . $spaces);
       }
 
+      $file->getContent()->set($collection->assemble());
     }
 
   }

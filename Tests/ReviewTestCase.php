@@ -22,16 +22,14 @@
       file_put_contents($path, $input);
 
       $file = new FileInfo($path, FileInfo::STATUS_UNKNOWN);
-      $tokenizer = $file->getTokenizer();
+      self::assertNotEmpty($file->getContent()->get());
       unlink($path);
-
-      $this->assertNotEmpty($tokenizer);
 
       $report = new Report();
       $tool->process($file, $report);
 
 
-      $output = $tokenizer->getCollection()->assemble();
+      $output = $file->getContent()->get();
 
       $this->assertEquals($input, $output, 'Review should not change source code. Tool:' . $tool->getName());
 

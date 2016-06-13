@@ -43,7 +43,8 @@
      * @void
      */
     public function process(FileInfo $file, Report $report) {
-      $tokens = $this->getInvalidTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $tokens = $this->getInvalidTokens($collection);
 
       foreach ($tokens as $token) {
         $report->addNotice($file, $this, 'Set one line before closing tag', $token->getLine());
@@ -61,6 +62,7 @@
         $token->setValue($lineStart . "\n\n" . $lineEnd);
       }
 
+      $file->getContent()->set($collection->assemble());
     }
 
   }

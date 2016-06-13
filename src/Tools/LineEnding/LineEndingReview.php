@@ -25,7 +25,8 @@
      * @inheritdoc
      */
     public function process(FileInfo $file, Report $report) {
-      $tokens = $this->getInvalidStartTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $tokens = $collection->find($this->getFindQuery());
 
       foreach ($tokens as $token) {
         $report->addError($file, $this, 'Expect only LF line ending', $token->getLine());

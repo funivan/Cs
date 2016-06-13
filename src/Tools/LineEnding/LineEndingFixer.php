@@ -28,7 +28,8 @@
      * @void
      */
     public function process(FileInfo $file, Report $report) {
-      $tokens = $this->getInvalidStartTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $tokens = $collection->find($this->getFindQuery());
 
       foreach ($tokens as $token) {
         $value = $token->getValue();
@@ -37,6 +38,9 @@
 
         $report->addNotice($file, $this, 'Replace invalid line ending', $token->getLine());
       }
+
+
+      $file->getContent()->set($collection->assemble());
     }
 
   }

@@ -33,9 +33,11 @@
      * @inheritdoc
      */
     public function process(FileInfo $file, Report $report) {
-      $tokens = $this->findTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
 
-      $lastInvalidToken = $this->getLastInvalidToken($file);
+      $tokens = $this->findTokens($collection);
+
+      $lastInvalidToken = $this->getLastInvalidToken($collection);
       if (null !== $lastInvalidToken) {
         $tokens->append($lastInvalidToken);
       }

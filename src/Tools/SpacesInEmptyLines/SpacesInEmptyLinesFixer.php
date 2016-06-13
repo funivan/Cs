@@ -34,12 +34,13 @@
      * @inheritdoc
      */
     public function process(FileInfo $file, Report $report) {
-      $stripTokens = $this->findTokens($file);
+      $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
+      $stripTokens = $this->findTokens($collection);
 
 
       $invalidTokensNum = $stripTokens->count();
 
-      $lastInvalidToken = $this->getLastInvalidToken($file);
+      $lastInvalidToken = $this->getLastInvalidToken($collection);
 
       if (null !== $lastInvalidToken) {
         $invalidTokensNum++;
@@ -63,6 +64,8 @@
         $value = preg_replace('!^[ ]+!', '', $value);
         $lastInvalidToken->setValue($value);
       }
+
+      $file->getContent()->set($collection->assemble());
     }
 
 

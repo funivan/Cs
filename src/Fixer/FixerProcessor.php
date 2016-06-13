@@ -7,7 +7,6 @@
   use Funivan\Cs\Message\Report;
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class FixerProcessor extends BaseFileProcessor {
@@ -50,13 +49,11 @@
 
           $tool->process($file, $report);
 
-          $tokenizer = $file->getTokenizer();
-          $fileChanged = $tokenizer->isChanged();
+          $fileChanged = $file->getContent()->isChanged();
           if ($fileChanged === false) {
             continue;
           }
 
-          $tokenizer->refresh();
           $fixed = true;
 
           $filePathInfo = '';
@@ -68,7 +65,7 @@
         }
 
         if ($fixed and $this->saveFiles) {
-          $file->getTokenizer()->save();
+          $file->save();
           $this->getOutput()->writeln('<info>' . '✔ saved    : ' . $file->getPath() . '</info>');
         }
 
