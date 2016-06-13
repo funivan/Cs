@@ -1,4 +1,4 @@
-<?
+<?php
 
   namespace Funivan\Cs\FileFinder;
 
@@ -12,10 +12,6 @@
      */
     private $content;
 
-    /**
-     * @var boolean
-     */
-    private $isChanged = false;
 
     /**
      * @var string|null
@@ -63,6 +59,5 @@
     private function getContentHash() {
       return md5($this->content);
     }
-
 
   }
