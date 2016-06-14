@@ -37,7 +37,6 @@
      * @param FileTool $tool
      * @param $text
      * @param int|null $line
-     * @param int $level
      */
     public function __construct(File $file, FileTool $tool, $text, $line) {
 

@@ -4,7 +4,8 @@
 
   use Funivan\Cs\Configuration\ConfigurationInterface;
   use Funivan\Cs\FileFinder\FinderParams;
-  use Funivan\Cs\FileProcessor\FixerProcessor;
+  use Funivan\Cs\FileProcessor\BaseFileProcessor;
+  use Funivan\Cs\FileProcessor\FileProcessorInterface;
   use Funivan\Cs\FileTool\ToolsFilter;
   use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Command\Command;
@@ -93,7 +94,9 @@
         $output->writeln('Add tool: ' . $tool->getName(), OutputInterface::VERBOSITY_VERY_VERBOSE);
       }
 
-      $fileProcessor->setOutput($output);
+      if ($fileProcessor instanceof BaseFileProcessor) {
+        $fileProcessor->setOutput($output);
+      }
 
       $params = new FinderParams();
       $params->setDirectory($input->getOption('directory'));
@@ -117,7 +120,7 @@
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return FixerProcessor
+     * @return FileProcessorInterface
      */
     protected abstract function getFileProcessor(InputInterface $input, OutputInterface $output);
 
