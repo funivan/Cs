@@ -2,11 +2,11 @@
 
   namespace Funivan\Cs\FileProcessor;
 
+  use Funivan\Cs\FileTool\FileTool;
   use Symfony\Component\Console\Output\NullOutput;
   use Symfony\Component\Console\Output\OutputInterface;
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   abstract class BaseFileProcessor implements FileProcessorInterface {
@@ -24,11 +24,9 @@
 
     /**
      * @param FileTool $tool
-     * @return $this
      */
     public function addTool(FileTool $tool) {
       $this->tools[] = $tool;
-      return $this;
     }
 
 

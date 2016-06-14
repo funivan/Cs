@@ -2,10 +2,10 @@
 
   namespace Funivan\Cs\Review\Tools;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Report\Report;
   use Symfony\Component\Process\Process;
 
   /**
@@ -35,15 +35,15 @@
     /**
      * @inheritdoc
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->name('!^composer.json$!')->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->name('!^composer.json$!')->isValid($file);
     }
 
 
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
 
       $cmd = sprintf('composer validate %s', $file->getPath());
 
@@ -62,7 +62,7 @@
         $line = (int) $matchedLine[1];
       }
 
-      $report->addError($file, $this, 'Invalid composer.json file format', $line);
+      $report->addMessage($file, $this, 'Invalid composer.json file format', $line);
     }
 
   }

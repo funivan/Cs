@@ -5,9 +5,8 @@
   use Funivan\Cs\Configuration\ConfigurationInterface;
   use Funivan\Cs\Configuration\CsConfiguration;
   use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactory;
-  use Funivan\Cs\Message\FileMessage;
-  use Funivan\Cs\Message\Report;
-  use Funivan\Cs\Review\ReviewFileProcessor;
+  use Funivan\Cs\FileProcessor\ReviewFileProcessor;
+  use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Output\OutputInterface;
 
@@ -44,20 +43,15 @@
 
       $output->writeln('');
 
-      $hasCriticalError = false;
 
       $errorsNum = 0;
       foreach ($report as $message) {
         $errorsNum++;
-        if ($message->getLevel() === FileMessage::LEVEL_ERROR) {
-          $hasCriticalError = true;
-        }
 
         $output->write('<error>');
-        $output->writeln('level   : ' . $message->getLevelName());
         $output->writeln('file    : ' . $message->getFile()->getPath() . ':' . $message->getLine());
         if ($isVerbose) {
-          $output->writeln('tool    : ' . $message->getToolName());
+          $output->writeln('tool    : ' . $message->getTool()->getName());
           $output->writeln('info    : ' . $message->getTool()->getDescription());
         }
 
@@ -70,13 +64,8 @@
         return 0;
       }
 
-      if ($hasCriticalError) {
-        $output->writeln('<error>✘ Please fix the errors above. Errors num: ' . $errorsNum . '</error>');
-        return 1;
-      }
-
-      $output->writeln('<error>✘ Take a look. There are some notices.  Notices num: ' . $errorsNum . '</error>');
-      return 0;
+      $output->writeln('<error>✘ Please fix the errors above. Errors num: ' . $errorsNum . '</error>');
+      return 1;
     }
 
 

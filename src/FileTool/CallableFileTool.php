@@ -1,19 +1,19 @@
 <?php
 
-  namespace Funivan\Cs\FileProcessor;
+  namespace Funivan\Cs\FileTool;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class CustomFileTool implements FileTool {
+  class CallableFileTool implements FileTool {
 
     /**
      * @var string
      */
-    private $id;
+    private $name;
 
     /**
      * @var string|null
@@ -32,10 +32,10 @@
 
 
     /**
-     * @param string $id
+     * @param string $name
      */
-    public function __construct($id) {
-      $this->id = $id;
+    public function __construct($name) {
+      $this->name = $name;
     }
 
 
@@ -43,7 +43,7 @@
      * @inheritdoc
      */
     public function getName() {
-      return $this->id;
+      return $this->name;
     }
 
 
@@ -52,7 +52,7 @@
      */
     public function getDescription() {
       if ($this->description === null) {
-        throw new \RuntimeException('Empty description');
+        throw new \RuntimeException('Empty tool description');
 
       }
       return $this->description;
@@ -60,15 +60,15 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @return bool
      * @throws \Exception
      */
-    public function canProcess(FileInfo $file) {
+    public function canProcess(File $file) {
       $callback = $this->canProcessCallback;
 
       if ($callback === null) {
-        throw new \Exception('Empty canProcess callback');
+        throw new \RuntimeException('Empty canProcess callback');
       }
 
       return $callback($file);
@@ -76,15 +76,15 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @param Report $report
      * @throws \Exception
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $callback = $this->processCallback;
 
       if ($callback === null) {
-        throw new \Exception('Empty process callback');
+        throw new \RuntimeException('Empty process callback');
       }
 
 

@@ -1,13 +1,13 @@
 <?php
 
-  namespace Funivan\Cs\FileProcessor;
+  namespace Funivan\Cs\Filters;
 
-  use Funivan\Cs\FileFinder\FileInfo;
+  use Funivan\Cs\FileFinder\File;
 
   /**
-   * @todo rename
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class CanProcessHelper {
+  class FileFilter {
 
     /**
      * @var callable[]
@@ -20,7 +20,7 @@
      * @return $this
      */
     public function mimeType($type) {
-      $this->callback[] = function (FileInfo $file) use ($type) {
+      $this->callback[] = function (File $file) use ($type) {
         return (strpos($file->getMimeType(), $type) === 0);
       };
       return $this;
@@ -32,7 +32,7 @@
      * @return $this
      */
     public function path($regex) {
-      $this->callback[] = function (FileInfo $file) use ($regex) {
+      $this->callback[] = function (File $file) use ($regex) {
         $regex = (array) $regex;
         $path = $file->getPath();
 
@@ -53,7 +53,7 @@
      * @return $this
      */
     public function name($regex) {
-      $this->callback[] = function (FileInfo $file) use ($regex) {
+      $this->callback[] = function (File $file) use ($regex) {
         $regex = (array) $regex;
         $path = $file->getName();
 
@@ -73,7 +73,7 @@
      * @return $this
      */
     public function extension($ext) {
-      $this->callback[] = function (FileInfo $file) use ($ext) {
+      $this->callback[] = function (File $file) use ($ext) {
         return (in_array($file->getExtension(), (array) $ext));
       };
       return $this;
@@ -85,7 +85,7 @@
      * @return $this
      */
     public function status($status) {
-      $this->callback[] = function (FileInfo $file) use ($status) {
+      $this->callback[] = function (File $file) use ($status) {
         $status = (array) $status;
         return in_array($file->getStatus(), $status);
       };
@@ -97,21 +97,21 @@
      */
     public function notDeleted() {
       $this->status([
-        FileInfo::STATUS_ADDED,
-        FileInfo::STATUS_COPIED,
-        FileInfo::STATUS_RENAMED,
-        FileInfo::STATUS_MODIFIED,
-        FileInfo::STATUS_UNKNOWN,
+        File::STATUS_ADDED,
+        File::STATUS_COPIED,
+        File::STATUS_RENAMED,
+        File::STATUS_MODIFIED,
+        File::STATUS_UNKNOWN,
       ]);
       return $this;
     }
 
 
     /**
-     * @param FileInfo $fileInfo
+     * @param File $fileInfo
      * @return bool
      */
-    public function isValid(FileInfo $fileInfo) {
+    public function isValid(File $fileInfo) {
 
       foreach ($this->callback as $callback) {
         if ($callback($fileInfo) === false) {

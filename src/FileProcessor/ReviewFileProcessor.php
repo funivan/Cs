@@ -1,13 +1,12 @@
 <?php
 
-  namespace Funivan\Cs\Review;
+  namespace Funivan\Cs\FileProcessor;
 
   use Funivan\Cs\FileFinder\FileInfoCollection;
-  use Funivan\Cs\FileProcessor\BaseFileProcessor;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\Report\Report;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class ReviewFileProcessor extends BaseFileProcessor {
 
@@ -29,7 +28,6 @@
 
         foreach ($this->getTools() as $tool) {
 
-
           if (!$tool->canProcess($file)) {
             continue;
           }
@@ -44,7 +42,7 @@
           }
 
 
-          $this->getOutput()->writeln('✘ error : ' . $tool->getDescription(). ' (' . $tool->getName() . ')');
+          $this->getOutput()->writeln('✘ error : ' . $tool->getDescription() . ' (' . $tool->getName() . ')');
         }
       }
 

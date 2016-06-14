@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags\Tests;
 
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsConfiguration;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsAbstract;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
   use Tests\Funivan\Cs\FixerTestCase;
 
@@ -18,19 +18,19 @@
     public function getConvertTagsDataProvider() {
       return [
         [
-          PhpOpenTagsConfiguration::TAG_FORMAT_SHORT,
+          PhpOpenTagsAbstract::TAG_FORMAT_SHORT,
           '<?php
 ?><?',
           '<?
 ?><?',
         ],
         [
-          PhpOpenTagsConfiguration::TAG_FORMAT_SHORT,
+          PhpOpenTagsAbstract::TAG_FORMAT_SHORT,
           '<?php echo 1',
           '<? echo 1',
         ],
         [
-          PhpOpenTagsConfiguration::TAG_FORMAT_SHORT,
+          PhpOpenTagsAbstract::TAG_FORMAT_SHORT,
           '<?php
 echo 1',
           '<?

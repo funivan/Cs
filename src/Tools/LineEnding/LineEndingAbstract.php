@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\LineEnding;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
   use Funivan\PhpTokenizer\Query\Query;
   use Funivan\PhpTokenizer\Token;
 
@@ -32,11 +32,11 @@
 
     /**
      * @codeCoverageIgnore
-     * @param FileInfo $file
+     * @param File $file
      * @return boolean
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->mimeType('text')->notDeleted()->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->mimeType('text')->notDeleted()->isValid($file);
     }
 
 
@@ -67,10 +67,10 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @return \Funivan\PhpTokenizer\Collection
      */
-    protected function getInvalidStartTokens(FileInfo $file) {
+    protected function getInvalidStartTokens(File $file) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       return $collection->find($this->getFindQuery());
     }

@@ -3,7 +3,8 @@
   namespace Funivan\Cs\FileProcessor;
 
   use Funivan\Cs\FileFinder\FileInfoCollection;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Report\Report;
 
 
   /**

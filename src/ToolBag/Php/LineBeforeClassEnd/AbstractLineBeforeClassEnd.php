@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\ToolBag\Php\LineBeforeClassEnd;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Pattern\Pattern;
   use Funivan\PhpTokenizer\Pattern\Patterns\ClassPattern;
@@ -16,11 +16,11 @@
   abstract class AbstractLineBeforeClassEnd implements FileTool {
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @return boolean
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->extension('php')->notDeleted()->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->extension('php')->notDeleted()->isValid($file);
     }
 
 
@@ -29,7 +29,6 @@
      * @return Collection
      */
     protected function getInvalidTokens(Collection $collection) {
-
 
       $resultCollection = new Collection();
       $classBody = (new Pattern($collection))->apply(new ClassPattern())->getCollections();

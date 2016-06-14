@@ -17,7 +17,7 @@ Perform code fix and review
 | ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
 | ✔     | ✔      | [PhpOpenTags](src/Tools/PhpOpenTags/README.md)                                   |
 | ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
-                                                                                              
+
 
 ## Install
 
@@ -48,16 +48,14 @@ Create custom configuration file. For example `cs-fix.php`
 
 
   use Funivan\Cs\Configuration\CsConfiguration;
-  use Funivan\Cs\Configuration\ToolConfiguration;
   use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactory;
 
   $configuration = CsConfiguration::createFixerConfiguration();
   $configuration->setFileFinderFactory(new FileFinderFactory(__DIR__));
 
   // You can add custom tools
-  // $configuration->addToolConfiguration(new ToolConfiguration('my_custom_tool', \MyCustomToolFixer::class));
+  $configuration->setTool(new \Funivan\Cs\Tools\LineEnding\LineEndingFixer());
 
-  return $configuration;
 ```
 Then run fixer
 ```sh

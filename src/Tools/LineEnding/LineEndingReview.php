@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\LineEnding;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
    *
@@ -24,12 +24,12 @@
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $tokens = $collection->find($this->getFindQuery());
 
       foreach ($tokens as $token) {
-        $report->addError($file, $this, 'Expect only LF line ending', $token->getLine());
+        $report->addMessage($file, $this, 'Expect only LF line ending', $token->getLine());
       }
 
     }

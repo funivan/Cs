@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
@@ -24,7 +24,7 @@
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $tags = $this->findTags($collection);
       if ($tags->count() === 0) {
@@ -38,7 +38,7 @@
 
       $newTag = $this->useShortTags() ? '<?' : '<?php';
       foreach ($tags as $tag) {
-        $report->addNotice($file, $this, $message, $tag->getLine());
+        $report->addMessage($file, $this, $message, $tag->getLine());
 
         $spaces = preg_replace('!^(\S+)(\s)!', '$2', $tag->getValue());
         if ($spaces === $tag->getValue()) {

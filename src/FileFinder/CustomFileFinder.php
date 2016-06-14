@@ -6,7 +6,6 @@
   use Symfony\Component\Finder\SplFileInfo;
 
   /**
-   
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class CustomFileFinder implements FileFinderInterface {
@@ -28,13 +27,13 @@
     /**
      * @return FileInfoCollection
      */
-    public function getFiles() {
+    public function getFileCollection() {
       $filesCollection = new FileInfoCollection();
 
       $files = $this->finder->files();
       /** @var SplFileInfo $file */
       foreach ($files as $file) {
-        $filesCollection[] = new FileInfo($file->getRealPath(), FileInfo::STATUS_UNKNOWN);
+        $filesCollection[] = new File($file->getRealPath(), File::STATUS_UNKNOWN);
       }
 
       return $filesCollection;

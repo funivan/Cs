@@ -2,14 +2,14 @@
 
   namespace Funivan\Cs\Review\Tools;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Report\Report;
   use Symfony\Component\Process\Process;
 
   /**
-   
+
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class PhpFileStartReview implements FileTool {
@@ -36,15 +36,15 @@
     /**
      * @inheritdoc
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->notDeleted()->extension('php')->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->notDeleted()->extension('php')->isValid($file);
     }
 
 
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $cmd = sprintf('read -r LINE < %s && echo $LINE', $file->getPath());
 
       $process = new Process($cmd);
@@ -54,7 +54,7 @@
 
       if (!in_array($firstLine, ['<?php', '<?', '#!/usr/bin/env php'])) {
         $message = 'File must begin with `<?php` or `<?php` or `#!/usr/bin/env php`';
-        $report->addError($file, $this, $message, 0);
+        $report->addMessage($file, $this, $message, 0);
       }
     }
 

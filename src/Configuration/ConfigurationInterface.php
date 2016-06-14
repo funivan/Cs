@@ -4,9 +4,10 @@
 
   use Funivan\Cs\FileFinder\FileFinderInterface;
   use Funivan\Cs\FileFinder\FinderParams;
+  use Funivan\Cs\FileTool\FileTool;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   interface ConfigurationInterface {
 
@@ -18,8 +19,8 @@
 
 
     /**
-     * @return ToolConfigurationInterface[]
+     * @return FileTool[]
      */
-    public function getToolsConfiguration();
+    public function getTools();
 
   }

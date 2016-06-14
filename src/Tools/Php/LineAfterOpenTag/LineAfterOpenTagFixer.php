@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\Php\LineAfterOpenTag;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
   use Funivan\PhpTokenizer\Token;
 
   /**
@@ -31,11 +31,11 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @param Report $report
      * @void
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
 
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $items = $this->getInvalidStartTokens($collection);
@@ -63,7 +63,7 @@
         $append = $tokenValue . "\n\n" . $whitespaceValue;
 
         $token->setValue($append);
-        $report->addNotice($file, $this, 'Set one empty line after php open tag', $token->getValue());
+        $report->addMessage($file, $this, 'Set one empty line after php open tag', $token->getValue());
       }
 
       $file->getContent()->set($collection->assemble());

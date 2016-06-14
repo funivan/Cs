@@ -26,7 +26,6 @@
       parent::__construct('PHP CS', self::VERSION);
       $this->add(new FixCommand());
       $this->add(new ReviewCommand());
-
     }
 
 
@@ -34,7 +33,7 @@
      * @return string
      */
     public function getLongVersion() {
-      $version = parent::getLongVersion() . ' by <comment>Ivan Scherbak</comment>';
+      $version = parent::getLongVersion() . ' by <comment>Ivan Shcherbak</comment>';
       $commit = '@git-commit@';
       if ('@' . 'git-commit@' !== $commit) {
         $version .= ' (' . substr($commit, 0, 7) . ')';

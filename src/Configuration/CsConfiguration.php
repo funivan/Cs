@@ -4,9 +4,10 @@
 
   use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactoryInterface;
   use Funivan\Cs\FileFinder\FinderParams;
+  use Funivan\Cs\FileTool\FileTool;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class CsConfiguration implements ConfigurationInterface {
 
@@ -16,16 +17,16 @@
     private $fileFinderFactory = null;
 
     /**
-     * @var ToolConfigurationInterface[]
+     * @var FileTool[]
      */
-    private $toolsConfiguration = [];
+    private $tools = [];
 
 
     /**
      * @return CsConfiguration
      */
     public static function createFixerConfiguration() {
-      return (new CsConfiguration())->addToolsConfigurations(DefaultTools::getFixers());
+      return (new CsConfiguration())->addTools(DefaultTools::getFixers());
     }
 
 
@@ -33,7 +34,7 @@
      * @return CsConfiguration
      */
     public static function createReviewConfiguration() {
-      return (new CsConfiguration())->addToolsConfigurations(DefaultTools::getReviews());
+      return (new CsConfiguration())->addTools(DefaultTools::getReviews());
     }
 
 
@@ -60,59 +61,60 @@
 
 
     /**
-     * @return ToolConfigurationInterface[]
+     * @return FileTool[]
      */
-    public function getToolsConfiguration() {
-      return $this->toolsConfiguration;
+    public function getTools() {
+      return $this->tools;
     }
 
 
     /**
-     * @param ToolConfigurationInterface[] $toolsConfigurations
+     * @param FileTool[] $fileTools
      * @return $this
      */
-    public function addToolsConfigurations(array $toolsConfigurations) {
-      foreach ($toolsConfigurations as $toolConfig) {
-        $this->addToolConfiguration($toolConfig);
+    public function addTools(array $fileTools) {
+      foreach ($fileTools as $toolConfig) {
+        $this->addTool($toolConfig);
       }
       return $this;
     }
 
 
     /**
-     * @param ToolConfigurationInterface $toolConfiguration
+     * @param FileTool $fileTool
      * @return $this
      */
-    public function addToolConfiguration(ToolConfigurationInterface $toolConfiguration) {
-      $name = $toolConfiguration->getName();
-      if (isset($this->toolsConfiguration[$name])) {
+    public function addTool(FileTool $fileTool) {
+      $name = $fileTool->getName();
+      if (isset($this->tools[$name])) {
         throw new \InvalidArgumentException('Tool with name: ' . $name . ' already exist');
       }
 
-      $this->toolsConfiguration[$name] = $toolConfiguration;
+      $this->tools[$name] = $fileTool;
       return $this;
     }
 
 
     /**
-     * @param ToolConfigurationInterface $toolConfiguration
+     * @param FileTool $fileTool
      * @return $this
      */
-    public function setToolConfiguration(ToolConfigurationInterface $toolConfiguration) {
-      $name = $toolConfiguration->getName();
-      $this->toolsConfiguration[$name] = $toolConfiguration;
+    public function setTool(FileTool $fileTool) {
+      $name = $fileTool->getName();
+      $this->tools[$name] = $fileTool;
       return $this;
     }
 
 
     /**
      * @param string $name
-     * @return ToolConfigurationInterface|null
+     * @return FileTool|null
      */
-    public function getToolConfiguration($name) {
-      if (isset($this->toolsConfiguration[$name])) {
-        return $this->toolsConfiguration[$name];
+    public function getTool($name) {
+      if (isset($this->tools[$name])) {
+        return $this->tools[$name];
       }
+
       return null;
     }
 

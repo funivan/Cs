@@ -2,10 +2,10 @@
 
   namespace Funivan\Cs\Review\Tools;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Report\Report;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
 
@@ -38,20 +38,20 @@
     /**
      * @inheritdoc
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->extension('php')->notDeleted()->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->extension('php')->notDeleted()->isValid($file);
     }
 
 
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
 
       $tokens = Collection::createFromString($file->getContent()->get());
       $closedTags = $tokens->find((new Query())->valueIs('?>'));
       foreach ($closedTags as $token) {
-        $report->addError($file, $this, 'File contains ending tag', $token->getLine());
+        $report->addMessage($file, $this, 'File contains ending tag', $token->getLine());
       }
     }
 

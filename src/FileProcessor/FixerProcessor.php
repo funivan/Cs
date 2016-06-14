@@ -1,10 +1,9 @@
 <?php
 
-  namespace Funivan\Cs\Fixer;
+  namespace Funivan\Cs\FileProcessor;
 
   use Funivan\Cs\FileFinder\FileInfoCollection;
-  use Funivan\Cs\FileProcessor\BaseFileProcessor;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\Report\Report;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
@@ -84,11 +83,9 @@
 
     /**
      * @param boolean $saveFiles
-     * @return $this
      */
     public function setSaveFiles($saveFiles) {
       $this->saveFiles = $saveFiles;
-      return $this;
     }
 
   }

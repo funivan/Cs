@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
   use Funivan\PhpTokenizer\Token;
@@ -16,11 +16,11 @@
 
     /**
      * @codeCoverageIgnore
-     * @param FileInfo $file
+     * @param File $file
      * @return boolean
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->notDeleted()->extension(['php', 'html'])->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->notDeleted()->extension(['php', 'html'])->isValid($file);
     }
 
 

@@ -5,7 +5,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class FileInfo {
+  class File {
 
     const STATUS_UNKNOWN = 0;
 

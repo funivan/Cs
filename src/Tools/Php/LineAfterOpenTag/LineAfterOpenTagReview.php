@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\Php\LineAfterOpenTag;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
    *
@@ -34,10 +34,10 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @param Report $report
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
 
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $items = $this->getInvalidStartTokens($collection);
@@ -46,7 +46,7 @@
         return;
       }
       foreach ($items as $lineTokenData) {
-        $report->addError($file, $this, 'Expect at one empty line after php open tag', $lineTokenData->getToken()->getLine());
+        $report->addMessage($file, $this, 'Expect at one empty line after php open tag', $lineTokenData->getToken()->getLine());
       }
 
     }

@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
    *
@@ -24,7 +24,7 @@
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
 
       $tags = $this->findTags($collection);
@@ -38,7 +38,7 @@
 
 
       foreach ($tags as $tag) {
-        $report->addError($file, $this, $message, $tag->getLine());
+        $report->addMessage($file, $this, $message, $tag->getLine());
       }
 
     }

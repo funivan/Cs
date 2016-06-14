@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
    */
@@ -33,7 +33,7 @@
     /**
      * @inheritdoc
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $stripTokens = $this->findTokens($collection);
 
@@ -50,7 +50,7 @@
         return;
       }
 
-      $report->addNotice($file, $this, 'Find empty lines with spaces: ' . $invalidTokensNum);
+      $report->addMessage($file, $this, 'Find empty lines with spaces: ' . $invalidTokensNum);
 
       foreach ($stripTokens as $token) {
         $value = $token->getValue();

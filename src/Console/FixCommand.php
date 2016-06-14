@@ -3,14 +3,14 @@
   namespace Funivan\Cs\Console;
 
   use Funivan\Cs\Configuration\ConfigurationInterface;
-  use Funivan\Cs\Fixer\FixerProcessor;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileProcessor\FixerProcessor;
+  use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Input\InputOption;
   use Symfony\Component\Console\Output\OutputInterface;
 
   /**
-   * This part of code will be exported to the external library.
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class FixCommand extends BaseCommand {
 
@@ -42,7 +42,7 @@
       foreach ($report as $message) {
         $output->write('<info>');
         $output->writeln('file    : ' . $message->getFile()->getPath() . ':' . $message->getLine());
-        $output->writeln('tool    : ' . $message->getToolName());
+        $output->writeln('tool    : ' . $message->getTool()->getName());
         if ($isVerbose) {
           $output->writeln('info    : ' . $message->getTool()->getDescription());
         }

@@ -2,9 +2,9 @@
 
   namespace Tests\Funivan\Cs;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\FileTool;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Report\Report;
 
   /**
    *
@@ -21,7 +21,7 @@
       $path = tempnam(sys_get_temp_dir(), 'review-test');
       file_put_contents($path, $input);
 
-      $file = new FileInfo($path, FileInfo::STATUS_UNKNOWN);
+      $file = new File($path, File::STATUS_UNKNOWN);
       self::assertNotEmpty($file->getContent()->get());
       unlink($path);
 

@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\Php\LineAfterOpenTag;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
   use Funivan\PhpTokenizer\Collection;
 
   /**
@@ -15,8 +15,8 @@
     /**
      * @return string* @inheritdoc
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->notDeleted()->extension('php')->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->notDeleted()->extension('php')->isValid($file);
     }
 
 

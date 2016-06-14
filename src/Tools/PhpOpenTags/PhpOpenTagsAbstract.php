@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\FileProcessor\CanProcessHelper;
-  use Funivan\Cs\FileProcessor\FileTool;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Filters\FileFilter;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
 
@@ -12,6 +12,10 @@
    *
    */
   abstract class PhpOpenTagsAbstract implements FileTool {
+
+    const TAG_FORMAT_SHORT = 2;
+
+    const TAG_FORMAT_LONG = 1;
 
     /**
      * @var null
@@ -23,11 +27,20 @@
      * @param int|null $tagFormat
      */
     public function __construct($tagFormat = null) {
-      if (!PhpOpenTagsConfiguration::isValidTagFormat($tagFormat)) {
+      if (!self::isValidTagFormat($tagFormat)) {
         throw new \InvalidArgumentException('Invalid tag format');
       }
 
       $this->tagFormat = $tagFormat;
+    }
+
+
+    /**
+     * @param int $tagFormat
+     * @return bool
+     */
+    public static function isValidTagFormat($tagFormat) {
+      return ($tagFormat === self::TAG_FORMAT_LONG or $tagFormat === self::TAG_FORMAT_SHORT);
     }
 
 
@@ -41,11 +54,11 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @return boolean
      */
-    public function canProcess(FileInfo $file) {
-      return (new CanProcessHelper())->notDeleted()->extension(['php', 'html'])->isValid($file);
+    public function canProcess(File $file) {
+      return (new FileFilter())->notDeleted()->extension(['php', 'html'])->isValid($file);
     }
 
 
@@ -53,7 +66,7 @@
      * @return bool
      */
     protected function useFullTags() {
-      return $this->tagFormat === PhpOpenTagsConfiguration::TAG_FORMAT_LONG;
+      return $this->tagFormat === self::TAG_FORMAT_LONG;
     }
 
 
@@ -61,7 +74,7 @@
      * @return bool
      */
     protected function useShortTags() {
-      return $this->tagFormat === PhpOpenTagsConfiguration::TAG_FORMAT_SHORT;
+      return $this->tagFormat === self::TAG_FORMAT_SHORT;
     }
 
 

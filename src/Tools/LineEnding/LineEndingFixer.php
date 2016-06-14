@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Tools\LineEnding;
 
-  use Funivan\Cs\FileFinder\FileInfo;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Report\Report;
 
   /**
    *
@@ -23,11 +23,11 @@
 
 
     /**
-     * @param FileInfo $file
+     * @param File $file
      * @param Report $report
      * @void
      */
-    public function process(FileInfo $file, Report $report) {
+    public function process(File $file, Report $report) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $tokens = $collection->find($this->getFindQuery());
 
@@ -36,7 +36,7 @@
         $value = preg_replace(self::REGEX, "\n", $value);
         $token->setValue($value);
 
-        $report->addNotice($file, $this, 'Replace invalid line ending', $token->getLine());
+        $report->addMessage($file, $this, 'Replace invalid line ending', $token->getLine());
       }
 
 

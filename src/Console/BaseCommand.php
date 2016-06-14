@@ -4,17 +4,16 @@
 
   use Funivan\Cs\Configuration\ConfigurationInterface;
   use Funivan\Cs\FileFinder\FinderParams;
-  use Funivan\Cs\FileProcessor\ToolsFilter;
-  use Funivan\Cs\Fixer\FixerProcessor;
-  use Funivan\Cs\Message\Report;
+  use Funivan\Cs\FileProcessor\FixerProcessor;
+  use Funivan\Cs\FileTool\ToolsFilter;
+  use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Command\Command;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Input\InputOption;
-  use Symfony\Component\Console\Logger\ConsoleLogger;
   use Symfony\Component\Console\Output\OutputInterface;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   abstract class BaseCommand extends Command {
 
@@ -27,9 +26,11 @@
 
       $this->addOption('directory', null, InputOption::VALUE_REQUIRED, 'Process files inside this directory', null);
       $this->addOption('commit', null, InputOption::VALUE_REQUIRED, 'Process files changed in specific commit. By default we check all modified files', null);
-      $this->addOption('tools', null, InputOption::VALUE_REQUIRED, 'Filter tools by name');
+      $this->addOption('tools', null, InputOption::VALUE_REQUIRED, 'Filter tools by name', '');
 
-      $this->addOption('list-tools', null, InputOption::VALUE_NONE, 'Show Tools that will be applied to the files');
+      $this->addOption('list-tools', null, InputOption::VALUE_REQUIRED, 'Show Tools that will be applied to the files');
+
+      $this->addOption('list-all-tools', null, InputOption::VALUE_REQUIRED, 'Show All Tools that can be used');
 
       parent::configure();
     }
@@ -60,24 +61,36 @@
         throw new \Exception('Invalid configuration file result. Expect ' . ConfigurationInterface::class);
       }
 
-      $tools = $config->getToolsConfiguration();
+      $tools = $config->getTools();
 
+      # list all tools
+      if ($input->getOption('list-all-tools')) {
+        foreach ($tools as $tool) {
+          $output->writeln('Tool : ' . $tool->getName());
+        }
+        return 0;
+      }
 
-      $fixerNames = explode(',', $input->getOption('tools'));
-      $fixerNames = array_filter($fixerNames);
-      $fixTools = (new ToolsFilter($tools))->filterTools($fixerNames);
+      $toolsFilter = ToolsFilter::createFromString($input->getOption('tools'));
 
+      foreach ($tools as $index => $tool) {
+        if (!$toolsFilter->isValid($tool)) {
+          unset($tools[$index]);
+        }
+      }
+
+      # list tools
       if ($input->getOption('list-tools')) {
-        foreach ($fixTools as $toolConfig) {
-          $output->writeln('Tool : ' . $toolConfig->getName());
+        foreach ($tools as $tool) {
+          $output->writeln('Tool : ' . $tool->getName());
         }
         return 0;
       }
 
       $fileProcessor = $this->getFileProcessor($input, $output);
-      foreach ($fixTools as $toolConfig) {
-        $fileProcessor->addTool($toolConfig->createTool());
-        $output->writeln('Add tool: ' . $toolConfig->getName(), OutputInterface::VERBOSITY_VERY_VERBOSE);
+      foreach ($tools as $tool) {
+        $fileProcessor->addTool($tool);
+        $output->writeln('Add tool: ' . $tool->getName(), OutputInterface::VERBOSITY_VERY_VERBOSE);
       }
 
       $fileProcessor->setOutput($output);
@@ -85,7 +98,7 @@
       $params = new FinderParams();
       $params->setDirectory($input->getOption('directory'));
       $params->setCommit($input->getOption('commit'));
-      $files = $config->getFileFinderFactory($params)->getFiles();
+      $files = $config->getFileFinderFactory($params)->getFileCollection();
 
 
       if ($files->count() === 0) {
@@ -121,6 +134,6 @@
     /**
      * @return ConfigurationInterface
      */
-    protected abstract function getDefaultConfiguration() ;
+    protected abstract function getDefaultConfiguration();
 
   }
