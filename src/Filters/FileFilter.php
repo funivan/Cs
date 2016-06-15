@@ -68,12 +68,12 @@
 
 
     /**
-     * @param array|string $ext
+     * @param string[] $ext
      * @return $this
      */
-    public function extension($ext) {
+    public function extension(array $ext) {
       $this->callback[] = function (File $file) use ($ext) {
-        return (in_array($file->getExtension(), (array) $ext));
+        return (in_array($file->getExtension(), $ext));
       };
       return $this;
     }

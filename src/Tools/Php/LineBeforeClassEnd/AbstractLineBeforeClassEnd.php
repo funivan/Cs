@@ -26,7 +26,7 @@
      * @return boolean
      */
     public function canProcess(File $file) {
-      return (new FileFilter())->extension('php')->notDeleted()->isValid($file);
+      return (new FileFilter())->extension(['php'])->notDeleted()->isValid($file);
     }
 
 

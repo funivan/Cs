@@ -16,7 +16,7 @@
      * @return string* @inheritdoc
      */
     public function canProcess(File $file) {
-      return (new FileFilter())->notDeleted()->extension('php')->isValid($file);
+      return (new FileFilter())->notDeleted()->extension(['php'])->isValid($file);
     }
 
 

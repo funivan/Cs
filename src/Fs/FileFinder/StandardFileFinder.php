@@ -21,7 +21,7 @@
     public function findFiles(FinderParameters $finderParameters) {
       $filesCollection = new FilesCollection();
 
-      if ($finderParameters->get('dir')) {
+      if ($finderParameters->get('dir') !== null) {
         $dir = $finderParameters->get('dir');
 
         $files = (new Finder())->in($dir)->files();
@@ -35,12 +35,13 @@
       }
 
       $baseDir = $finderParameters->get('baseDir');
-      if (empty($baseDir)) {
+      if ($baseDir == null) {
         throw new \RuntimeException('Can not find files. Invalid baseDir finder parameter.');
       }
       $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-      if (!empty($commitHash)) {
-        $process = new Process('git diff-tree --no-commit-id --name-status  -r ' . $commitHash);
+      $commit = $finderParameters->get('commit');
+      if ($commit !== null) {
+        $process = new Process('git diff-tree --no-commit-id --name-status  -r ' . $commit);
       } else {
         $process = new Process('git diff --name-status ; git diff --cached --name-status');
       }

@@ -32,6 +32,7 @@
      */
     public function setInclude(array $include = null) {
       $this->include = $include;
+      return $this;
     }
 
 
@@ -49,6 +50,7 @@
      */
     public function setExclude(array $exclude = null) {
       $this->exclude = $exclude;
+      return $this;
     }
 
 

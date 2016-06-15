@@ -189,9 +189,9 @@
 
       foreach ($fixerNames as $name) {
         if (strpos($name, '-') === 0) {
-          $exclude[] = substr($name, 1);
+          $exclude[] = (string) substr($name, 1);
         } else {
-          $include[] = $name;
+          $include[] = (string) $name;
         }
       }
 
