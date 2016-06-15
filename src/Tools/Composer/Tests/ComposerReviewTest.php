@@ -35,11 +35,9 @@
 
     /**
      * @dataProvider getComposerFileDataProvider
-     *
-     * @param int $tagType
      * @param string $input
      * @param array $expectErrorLines
-     * @param bool $process
+     * @throws \Exception
      */
     public function testComposerFile($input, array $expectErrorLines) {
       $tool = new ComposerReview();
