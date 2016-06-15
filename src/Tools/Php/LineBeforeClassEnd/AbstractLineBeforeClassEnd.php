@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\Php\LineBeforeClassEnd;
+  namespace Funivan\Cs\Tools\Php\LineBeforeClassEnd;
 
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;
@@ -16,11 +16,38 @@
   abstract class AbstractLineBeforeClassEnd implements FileTool {
 
     /**
+     * @var int
+     */
+    private $linesNum = 1;
+
+
+    /**
      * @param File $file
      * @return boolean
      */
     public function canProcess(File $file) {
       return (new FileFilter())->extension('php')->notDeleted()->isValid($file);
+    }
+
+
+    /**
+     * @param int $linesNum
+     * @return $this
+     */
+    public function setLinesNum($linesNum) {
+      if (!is_int($linesNum) or $linesNum < 0) {
+        throw new \InvalidArgumentException('Expect positive lines num');
+      }
+      $this->linesNum = $linesNum;
+      return $this;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getLinesNum() {
+      return $this->linesNum;
     }
 
 
@@ -31,7 +58,7 @@
     protected function getInvalidTokens(Collection $collection) {
 
       $resultCollection = new Collection();
-      $classBody = (new Pattern($collection))->apply(new ClassPattern())->getCollections();
+      $classBody = (new Pattern($collection))->apply((new ClassPattern()))->getCollections();
       if (empty($classBody)) {
         return $resultCollection;
       }
@@ -66,8 +93,11 @@
         return false;
       }
 
-      $linesNum = count(explode("\n", $token->getValue())) - 2;
-      return (1 === $linesNum);
+      if ($this->linesNum === 0 and strpos($token->getValue(), "\n") === false) {
+        return true;
+      }
+
+      return ($this->linesNum === (count(explode("\n", $token->getValue())) - 2));
     }
 
   }

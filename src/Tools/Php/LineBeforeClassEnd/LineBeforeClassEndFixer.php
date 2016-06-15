@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\Php\LineBeforeClassEnd;
+  namespace Funivan\Cs\Tools\Php\LineBeforeClassEnd;
 
   use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
@@ -46,20 +46,23 @@
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
       $tokens = $this->getInvalidTokens($collection);
 
+      $emptyLines = "\n" . str_repeat("\n", $this->getLinesNum());
+
+
       foreach ($tokens as $token) {
         $report->addMessage($file, $this, 'Set one line before closing tag', $token->getLine());
         $value = $token->getValue();
 
         if ($token->getType() !== T_WHITESPACE) {
-          $token->setValue($value . "\n\n");
-          return;
+          $token->setValue($value . $emptyLines);
+        } else {
+          $lines = explode("\n", $value);
+          $lineStart = current($lines);
+          $lineEnd = end($lines);
+          $token->setValue($lineStart . $emptyLines . $lineEnd);
+
         }
 
-        $lines = explode("\n", $value);
-        $lineStart = current($lines);
-        $lineEnd = end($lines);
-
-        $token->setValue($lineStart . "\n\n" . $lineEnd);
       }
 
       $file->getContent()->set($collection->assemble());

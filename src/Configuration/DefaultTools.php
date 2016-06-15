@@ -6,13 +6,14 @@
   use Funivan\Cs\Review\Tools\PhpFileCloseTagReview;
   use Funivan\Cs\Review\Tools\PhpFileStartReview;
   use Funivan\Cs\Review\Tools\PhpSyntaxCheckReview;
-  use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
-  use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
   use Funivan\Cs\Tools\Composer\ComposerReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
+  use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
+  use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagFormat;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
@@ -36,7 +37,7 @@
         new SpacesInEmptyLinesFixer(),
         new LineBeforeClassEndFixer(),
 
-        new PhpOpenTagsFixer(PhpOpenTagsFixer::TAG_FORMAT_LONG),
+        new PhpOpenTagsFixer(PhpOpenTagFormat::LONG),
       ];
     }
 
@@ -55,7 +56,7 @@
         new ComposerReview(),
         new LineAfterOpenTagReview(),
 
-        new PhpOpenTagsReview(PhpOpenTagsFixer::TAG_FORMAT_LONG),
+        new PhpOpenTagsReview(PhpOpenTagFormat::LONG),
       ];
     }
 

@@ -17,6 +17,7 @@ Perform code fix and review
 | ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
 | ✔     | ✔      | [PhpOpenTags](src/Tools/PhpOpenTags/README.md)                                   |
 | ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
+| ✔     | ✔      | [LineBeforeClassEnd](src/Tools/Php/LineBeforeClassEnd/README.md)                                     |
 |       | ✔      | [Composer](src/Tools/Composer/README.md)                                     |
 
 

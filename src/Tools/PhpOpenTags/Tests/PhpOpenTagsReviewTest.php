@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags\Tests;
 
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsAbstract;
+  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagFormat;
   use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
   use Tests\Funivan\Cs\ReviewTestCase;
 
@@ -18,20 +18,20 @@
     public function getInvalidOpenTagsDataProvider() {
       return [
         [
-          PhpOpenTagsAbstract::TAG_FORMAT_LONG,
+          PhpOpenTagFormat::LONG,
           '<?php
           echo 1',
           [],
         ],
         [
-          PhpOpenTagsAbstract::TAG_FORMAT_LONG,
+          PhpOpenTagFormat::LONG,
           '<?
           echo 1',
           [1],
           'process' => (boolean) ini_get('short_open_tag'),
         ],
         [
-          PhpOpenTagsAbstract::TAG_FORMAT_LONG,
+          PhpOpenTagFormat::LONG,
           '<?php 
           echo 1;?>
           <? echo 1 ?>
@@ -43,18 +43,18 @@
         ],
 
         [
-          PhpOpenTagsAbstract::TAG_FORMAT_SHORT,
+          PhpOpenTagFormat::SHORT,
           '<?php
 ?><?',
           [1],
         ],
         [
-          PhpOpenTagsAbstract::TAG_FORMAT_SHORT,
+          PhpOpenTagFormat::SHORT,
           '<?php echo 1',
           [1],
         ],
         [
-          PhpOpenTagsAbstract::TAG_FORMAT_SHORT,
+          PhpOpenTagFormat::SHORT,
           '<?php
 echo 1?>
 

@@ -32,19 +32,18 @@ There are 2 types of tags:
 With configuration class `PhpOpenTagsFactory` you can configure `review` and `fixer`
 
 ```php
+<?php
+
     use Funivan\Cs\Tools\PhpOpenTags;
 
-    // Configure fixer
-    new PhpOpenTagsFactory(
-        PhpOpenTagsFactory::TAG_FORMAT_LONG, // specify tag format
-        PhpOpenTagsFactory::FIXER // specify whitch tool do you want to use
-    );
+    // Configure fixer and review to check use only long php tags (<?php)
+    new PhpOpenTags\PhpOpenTagsFixer(PhpOpenTags\PhpOpenTagFormat::LONG);
+    new PhpOpenTags\PhpOpenTagsReview(PhpOpenTags\PhpOpenTagFormat::LONG);
 
-    // Configure review
-    new PhpOpenTagsFactory(
-            PhpOpenTagsFactory::TAG_FORMAT_LONG,
-            PhpOpenTagsFactory::REVIEW
-    );
+    // Configure fixer and review to check use only short php tags (<?)
+
+    new PhpOpenTags\PhpOpenTagsFixer(PhpOpenTags\PhpOpenTagFormat::SHORT);
+    new PhpOpenTags\PhpOpenTagsReview(PhpOpenTags\PhpOpenTagFormat::SHORT);
 
 
 ```

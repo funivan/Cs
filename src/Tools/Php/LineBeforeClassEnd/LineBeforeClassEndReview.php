@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\ToolBag\Php\LineBeforeClassEnd;
+  namespace Funivan\Cs\Tools\Php\LineBeforeClassEnd;
 
   use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
