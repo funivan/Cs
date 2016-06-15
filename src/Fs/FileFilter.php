@@ -14,32 +14,24 @@
 
 
     /**
-     * @param string $type
+     * @param string[] $regex
      * @return $this
      */
-    public function mimeType($type) {
-      $this->callback[] = function (File $file) use ($type) {
-        return (strpos($file->getMimeType(), $type) === 0);
+    public function mimeType($regex) {
+      $this->callback[] = function (File $file) use ($regex) {
+        return $this->processMatch($regex, $file->getMimeType());
       };
       return $this;
     }
 
 
     /**
-     * @param string|array $regex
+     * @param string[] $regex
      * @return $this
      */
-    public function path($regex) {
+    public function path(array $regex) {
       $this->callback[] = function (File $file) use ($regex) {
-        $regex = (array) $regex;
-        $path = $file->getPath();
-
-        foreach ($regex as $reg) {
-          if (preg_match($reg, $path)) {
-            return true;
-          }
-        }
-        return false;
+        return $this->processMatch($regex, $file->getPath());
       };
 
       return $this;
@@ -52,14 +44,7 @@
      */
     public function name(array $regex) {
       $this->callback[] = function (File $file) use ($regex) {
-        $path = $file->getName();
-
-        foreach ($regex as $reg) {
-          if (preg_match($reg, $path)) {
-            return true;
-          }
-        }
-        return false;
+        return $this->processMatch($regex, $file->getName());
       };
       return $this;
     }
@@ -71,19 +56,18 @@
      */
     public function extension(array $ext) {
       $this->callback[] = function (File $file) use ($ext) {
-        return (in_array($file->getExtension(), $ext));
+        return in_array($file->getExtension(), $ext);
       };
       return $this;
     }
 
 
     /**
-     * @param array|string $status
+     * @param int[] $status
      * @return $this
      */
-    public function status($status) {
+    public function status(array $status) {
       $this->callback[] = function (File $file) use ($status) {
-        $status = (array) $status;
         return in_array($file->getStatus(), $status);
       };
     }
@@ -117,6 +101,21 @@
       }
 
       return true;
+    }
+
+
+    /**
+     * @param string[] $regex
+     * @param string $value
+     * @return bool
+     */
+    private function processMatch(array $regex, $value) {
+      foreach ($regex as $reg) {
+        if (preg_match($reg, $value) === 1) {
+          return true;
+        }
+      }
+      return false;
     }
 
   }

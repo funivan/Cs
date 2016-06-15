@@ -36,7 +36,7 @@
      * @return boolean
      */
     public function canProcess(File $file) {
-      return (new FileFilter())->mimeType('text')->notDeleted()->isValid($file);
+      return (new FileFilter())->mimeType(['/text/'])->notDeleted()->isValid($file);
     }
 
 
