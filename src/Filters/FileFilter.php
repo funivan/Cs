@@ -49,12 +49,11 @@
 
 
     /**
-     * @param string|array $regex
+     * @param string[] $regex
      * @return $this
      */
-    public function name($regex) {
+    public function name(array $regex) {
       $this->callback[] = function (File $file) use ($regex) {
-        $regex = (array) $regex;
         $path = $file->getName();
 
         foreach ($regex as $reg) {
