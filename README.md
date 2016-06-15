@@ -14,10 +14,10 @@ Perform code fix and review
 
 | Fixer | Review | Link                                                                             |
 |:-----:|:------:|:---------------------------------------------------------------------------------|
+| ✔     | ✔      | [Php OpenTags](src/Tools/Php/OpenTags/README.md)                                   |
+| ✔     | ✔      | [Php LineBeforeClassEnd](src/Tools/Php/LineBeforeClassEnd/README.md)                                     |
 | ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
-| ✔     | ✔      | [PhpOpenTags](src/Tools/PhpOpenTags/README.md)                                   |
 | ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
-| ✔     | ✔      | [LineBeforeClassEnd](src/Tools/Php/LineBeforeClassEnd/README.md)                                     |
 |       | ✔      | [Composer](src/Tools/Composer/README.md)                                     |
 
 

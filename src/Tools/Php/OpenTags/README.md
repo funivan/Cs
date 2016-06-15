@@ -34,16 +34,16 @@ With configuration class `PhpOpenTagsFactory` you can configure `review` and `fi
 ```php
 <?php
 
-    use Funivan\Cs\Tools\PhpOpenTags;
+    use Funivan\Cs\Tools\Php\OpenTags;
 
     // Configure fixer and review to check use only long php tags (<?php)
-    new PhpOpenTags\PhpOpenTagsFixer(PhpOpenTags\PhpOpenTagFormat::LONG);
-    new PhpOpenTags\PhpOpenTagsReview(PhpOpenTags\PhpOpenTagFormat::LONG);
+    new OpenTags\PhpOpenTagsFixer(OpenTags\PhpOpenTagFormat::LONG);
+    new OpenTags\PhpOpenTagsReview(OpenTags\PhpOpenTagFormat::LONG);
 
     // Configure fixer and review to check use only short php tags (<?)
 
-    new PhpOpenTags\PhpOpenTagsFixer(PhpOpenTags\PhpOpenTagFormat::SHORT);
-    new PhpOpenTags\PhpOpenTagsReview(PhpOpenTags\PhpOpenTagFormat::SHORT);
+    new OpenTags\PhpOpenTagsFixer(OpenTags\PhpOpenTagFormat::SHORT);
+    new OpenTags\PhpOpenTagsReview(OpenTags\PhpOpenTagFormat::SHORT);
 
 
 ```

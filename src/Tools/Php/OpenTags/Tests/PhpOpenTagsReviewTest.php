@@ -1,9 +1,9 @@
 <?php
 
-  namespace Funivan\Cs\Tools\PhpOpenTags\Tests;
+  namespace Funivan\Cs\Tools\Php\OpenTags\Tests;
 
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagFormat;
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
+  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagFormat;
+  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsReview;
   use Tests\Funivan\Cs\ReviewTestCase;
 
   /**

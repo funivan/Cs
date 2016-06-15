@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\Tools\PhpOpenTags;
+  namespace Funivan\Cs\Tools\Php\OpenTags;
 
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;

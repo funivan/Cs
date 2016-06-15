@@ -1,16 +1,16 @@
 <?php
 
-  namespace Funivan\Cs\Tools\PhpOpenTags;
+  namespace Funivan\Cs\Tools\Php\OpenTags;
 
   use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpOpenTagsReview extends PhpOpenTagsAbstract {
+  class PhpOpenTagsFixer extends PhpOpenTagsAbstract {
 
-    const NAME = 'php_open_tags_review';
+    const NAME = 'php_open_tags_fixer';
 
 
     /**
@@ -26,21 +26,29 @@
      */
     public function process(File $file, Report $report) {
       $collection = \Funivan\PhpTokenizer\Collection::createFromString($file->getContent()->get());
-
       $tags = $this->findTags($collection);
       if ($tags->count() === 0) {
         return;
       }
 
+
       $type = $this->useFullTags() ? 'long' : 'short';
+      $message = 'Detect ' . $type . ' php tag';
 
-      $message = 'You should use only ' . $type . ' php tags';
 
-
+      $newTag = $this->useShortTags() ? '<?' : '<?php';
       foreach ($tags as $tag) {
         $report->addMessage($file, $this, $message, $tag->getLine());
+
+        $spaces = preg_replace('!^(\S+)(\s)!', '$2', $tag->getValue());
+        if ($spaces === $tag->getValue()) {
+          $spaces = '';
+        }
+
+        $tag->setValue($newTag . $spaces);
       }
 
+      $file->getContent()->set($collection->assemble());
     }
 
   }

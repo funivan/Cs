@@ -13,9 +13,9 @@
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
   use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
   use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagFormat;
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsFixer;
-  use Funivan\Cs\Tools\PhpOpenTags\PhpOpenTagsReview;
+  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagFormat;
+  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsFixer;
+  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsReview;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
 
