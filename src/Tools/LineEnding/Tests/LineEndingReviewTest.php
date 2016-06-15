@@ -6,7 +6,7 @@
   use Tests\Funivan\Cs\ReviewTestCase;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class LineEndingReviewTest extends ReviewTestCase {
 

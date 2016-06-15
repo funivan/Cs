@@ -6,7 +6,7 @@
   use Tests\Funivan\Cs\FixerTestCase;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class LineEndingFixerTest extends FixerTestCase {
 

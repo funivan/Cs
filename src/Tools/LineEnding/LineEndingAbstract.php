@@ -9,18 +9,9 @@
   use Funivan\PhpTokenizer\Token;
 
   /**
-   * @todo add configuration. User specify
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   abstract class LineEndingAbstract implements FileTool {
-
-    /**
-     * @var array
-     */
-    private static $lineEndings = [
-      'crlf' => "\r\n",
-      'lf' => "\n",
-      'cr' => "\r",
-    ];
 
     const REGEX = '!\r\n?!';
 

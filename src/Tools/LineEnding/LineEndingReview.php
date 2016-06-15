@@ -6,7 +6,7 @@
   use Funivan\Cs\Report\Report;
 
   /**
-   *
+   * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class LineEndingReview extends LineEndingAbstract {
 
