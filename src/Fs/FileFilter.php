@@ -1,8 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\Filters;
-
-  use Funivan\Cs\Fs\File;
+  namespace Funivan\Cs\Fs;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016

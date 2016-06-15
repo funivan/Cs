@@ -3,8 +3,8 @@
   namespace Funivan\Cs\Tools\Php\LineBeforeClassEnd;
 
   use Funivan\Cs\FileTool\FileTool;
-  use Funivan\Cs\Filters\FileFilter;
   use Funivan\Cs\Fs\File;
+  use Funivan\Cs\Fs\FileFilter;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Pattern\Pattern;
   use Funivan\PhpTokenizer\Pattern\Patterns\ClassPattern;
