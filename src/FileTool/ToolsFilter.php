@@ -10,46 +10,45 @@
     /**
      * @var null|string[]
      */
-    private $include;
+    private $include = null;
 
     /**
      * @var null|string[]
      */
-    private $exclude;
+    private $exclude = null;
 
 
     /**
-     * @param string[]|null $include
-     * @param string[]|null $exclude
+     * @return null|string[]
      */
-    public function __construct(array $include = null, array $exclude = null) {
-      $this->include = $include;
-      $this->exclude = $exclude;
+    public function getInclude() {
+      return $this->include;
     }
 
 
     /**
-     * @param string $filters
-     * @param string $delimiter
+     * @param null|string[] $include
+     * @return $this
      */
-    public static function createFromString($filters, $delimiter = ',') {
-      $include = null;
-      $exclude = null;
+    public function setInclude(array $include = null) {
+      $this->include = $include;
+    }
 
 
-      $fixerNames = explode($delimiter, $filters);
-      $fixerNames = array_map('trim', $fixerNames);
-      $fixerNames = array_filter($fixerNames);
+    /**
+     * @return null|\string[]
+     */
+    public function getExclude() {
+      return $this->exclude;
+    }
 
-      foreach ($fixerNames as $name) {
-        if (strpos($name, '-') === 0) {
-          $exclude[] = substr($name, 1);
-        } else {
-          $include[] = $name;
-        }
-      }
 
-      return new self($include, $exclude);
+    /**
+     * @param null|\string[] $exclude
+     * @return $this
+     */
+    public function setExclude(array $exclude = null) {
+      $this->exclude = $exclude;
     }
 
 

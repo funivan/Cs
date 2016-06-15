@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\PhpOpenTags;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Fs\File;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
 

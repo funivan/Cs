@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Configuration;
 
-  use Funivan\Cs\FileFinder\FileFinderInterface;
-  use Funivan\Cs\FileFinder\FinderParams;
   use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Fs\FileFinder\FileFinderInterface;
+  use Funivan\Cs\Fs\FileFinder\FinderParameters;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
@@ -12,10 +12,10 @@
   interface ConfigurationInterface {
 
     /**
-     * @param FinderParams $finderParams
+     * @param FinderParameters $finderParams
      * @return FileFinderInterface
      */
-    public function getFileFinderFactory(FinderParams $finderParams);
+    public function getFilesFinder();
 
 
     /**

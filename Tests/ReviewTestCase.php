@@ -2,8 +2,8 @@
 
   namespace Tests\Funivan\Cs;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**
@@ -21,17 +21,23 @@
       $path = tempnam(sys_get_temp_dir(), 'review-test');
       file_put_contents($path, $input);
 
-      $file = new File($path, File::STATUS_UNKNOWN);
-      self::assertNotEmpty($file->getContent()->get());
-      unlink($path);
-
       $report = new Report();
-      $tool->process($file, $report);
+      try {
 
+        $file = new File($path, File::STATUS_UNKNOWN);
+        self::assertNotEmpty($file->getContent()->get());
 
-      $output = $file->getContent()->get();
+        $tool->process($file, $report);
 
-      $this->assertEquals($input, $output, 'Review should not change source code. Tool:' . $tool->getName());
+        $output = $file->getContent()->get();
+
+        $this->assertEquals($input, $output, 'Review should not change source code. Tool:' . $tool->getName());
+      } catch (\Exception $e) {
+        throw $e;
+      } finally {
+        @unlink($path);
+      }
+
 
       return $report;
     }

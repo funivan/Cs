@@ -3,6 +3,7 @@
   namespace Funivan\Cs\Console;
 
   use Funivan\Cs\Configuration\ConfigurationInterface;
+  use Funivan\Cs\Configuration\CsConfiguration;
   use Funivan\Cs\FileProcessor\FixerProcessor;
   use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Input\InputInterface;
@@ -74,13 +75,7 @@
      * @return ConfigurationInterface
      */
     protected function getDefaultConfiguration() {
-      /** @var \Funivan\Cs\Console\Application $app */
-      $app = $this->getApplication();
-
-      $configuration = \Funivan\Cs\Configuration\CsConfiguration::createFixerConfiguration();
-      $configuration->setFileFinderFactory(new \Funivan\Cs\FileFinder\FinderFactory\FileFinderFactory($app->getBaseProjectDirectory()));
-
-      return $configuration;
+      return CsConfiguration::createFixerConfiguration();
     }
 
   }

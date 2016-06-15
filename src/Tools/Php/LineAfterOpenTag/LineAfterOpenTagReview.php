@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\Tools\Php\LineAfterOpenTag;
 
-  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**

@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\FileFinder;
+  namespace Funivan\Cs\Fs;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016

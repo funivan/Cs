@@ -4,7 +4,6 @@
 
   use Funivan\Cs\Configuration\ConfigurationInterface;
   use Funivan\Cs\Configuration\CsConfiguration;
-  use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactory;
   use Funivan\Cs\FileProcessor\ReviewFileProcessor;
   use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Input\InputInterface;
@@ -73,13 +72,7 @@
      * @return ConfigurationInterface
      */
     protected function getDefaultConfiguration() {
-      /** @var \Funivan\Cs\Console\Application $app */
-      $app = $this->getApplication();
-
-      $configuration = CsConfiguration::createReviewConfiguration();
-      $configuration->setFileFinderFactory(new FileFinderFactory($app->getBaseProjectDirectory()));
-
-      return $configuration;
+      return CsConfiguration::createReviewConfiguration();
     }
 
   }

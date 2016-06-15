@@ -2,8 +2,8 @@
 
   namespace Funivan\Cs\Report;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Fs\File;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016

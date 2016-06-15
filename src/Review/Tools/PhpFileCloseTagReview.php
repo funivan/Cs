@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Review\Tools;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;

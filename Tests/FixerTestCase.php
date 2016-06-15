@@ -2,8 +2,8 @@
 
   namespace Tests\Funivan\Cs;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**

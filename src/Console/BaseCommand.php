@@ -3,10 +3,10 @@
   namespace Funivan\Cs\Console;
 
   use Funivan\Cs\Configuration\ConfigurationInterface;
-  use Funivan\Cs\FileFinder\FinderParams;
   use Funivan\Cs\FileProcessor\BaseFileProcessor;
   use Funivan\Cs\FileProcessor\FileProcessorInterface;
   use Funivan\Cs\FileTool\ToolsFilter;
+  use Funivan\Cs\Fs\FileFinder\FinderParameters;
   use Funivan\Cs\Report\Report;
   use Symfony\Component\Console\Command\Command;
   use Symfony\Component\Console\Input\InputInterface;
@@ -23,15 +23,16 @@
      */
     protected function configure() {
 
-      $this->addOption('configuration', null, InputOption::VALUE_REQUIRED, 'Path to the configuration file');
+      $this->addOption('configuration', null, InputOption::VALUE_REQUIRED, 'Path to the configuration file', null);
 
-      $this->addOption('directory', null, InputOption::VALUE_REQUIRED, 'Process files inside this directory', null);
-      $this->addOption('commit', null, InputOption::VALUE_REQUIRED, 'Process files changed in specific commit. By default we check all modified files', null);
-      $this->addOption('tools', null, InputOption::VALUE_REQUIRED, 'Filter tools by name', '');
+      $this->addOption('finder-parameter', null, InputOption::VALUE_IS_ARRAY ^ InputOption::VALUE_REQUIRED, 'Provide custom parameters fot the file finder', []);
 
+      $this->addOption('filter-tools', null, InputOption::VALUE_IS_ARRAY ^ InputOption::VALUE_REQUIRED, 'Filter tools by name', []);
+
+      #
       $this->addOption('list-tools', null, InputOption::VALUE_REQUIRED, 'Show Tools that will be applied to the files');
-
       $this->addOption('list-all-tools', null, InputOption::VALUE_REQUIRED, 'Show All Tools that can be used');
+
 
       parent::configure();
     }
@@ -42,25 +43,7 @@
      */
     protected final function execute(InputInterface $input, OutputInterface $output) {
 
-
-      $configuration = $input->getOption('configuration');
-
-      if (!empty($configuration)) {
-        /** @noinspection PhpIncludeInspection */
-        /** @var ConfigurationInterface $config */
-        $config = include_once $configuration;
-      } else {
-        $config = $this->getDefaultConfiguration();
-      }
-
-      if (empty($config)) {
-        $output->writeln('<error>Provide valid configuration file path</error>');
-        return 0;
-      }
-
-      if (!($config instanceof ConfigurationInterface)) {
-        throw new \Exception('Invalid configuration file result. Expect ' . ConfigurationInterface::class);
-      }
+      $config = $this->createConfiguration($input->getOption('configuration'));
 
       $tools = $config->getTools();
 
@@ -72,7 +55,7 @@
         return 0;
       }
 
-      $toolsFilter = ToolsFilter::createFromString($input->getOption('tools'));
+      $toolsFilter = $this->createToolsFilter($input->getOption('filter-tools'));
 
       foreach ($tools as $index => $tool) {
         if (!$toolsFilter->isValid($tool)) {
@@ -98,10 +81,11 @@
         $fileProcessor->setOutput($output);
       }
 
-      $params = new FinderParams();
-      $params->setDirectory($input->getOption('directory'));
-      $params->setCommit($input->getOption('commit'));
-      $files = $config->getFileFinderFactory($params)->getFileCollection();
+
+      $parameters = $input->getOption('finder-parameter');
+      $finderParameters = $this->createFinderParameters($parameters);
+
+      $files = $config->getFilesFinder()->findFiles($finderParameters);
 
 
       if ($files->count() === 0) {
@@ -138,5 +122,85 @@
      * @return ConfigurationInterface
      */
     protected abstract function getDefaultConfiguration();
+
+
+    /**
+     * @param array $rawParameters
+     * @return FinderParameters
+     */
+    private function createFinderParameters(array $rawParameters) {
+      $finderParameters = new FinderParameters();
+
+      /** @var Application $app */
+      $app = $this->getApplication();
+
+      $finderParameters->set('baseDir', $app->getBaseProjectDirectory());
+      foreach ($rawParameters as $paramInfo) {
+        $finderParameter = explode(':', $paramInfo);
+        if (count($finderParameter) !== 2) {
+          throw new \InvalidArgumentException('Invalid params format. Expect 2 values');
+        }
+        $finderParameters->set($finderParameter[0], $finderParameter[1]);
+      }
+
+      return $finderParameters;
+    }
+
+
+    /**
+     * @param string|null $configurationFilePath
+     * @return ConfigurationInterface
+     * @throws \Exception
+     */
+    protected function createConfiguration($configurationFilePath) {
+      if ($configurationFilePath === null) {
+        return $this->getDefaultConfiguration();
+      }
+
+      /** @noinspection PhpIncludeInspection */
+      /** @var ConfigurationInterface $config */
+      $config = include_once $configurationFilePath;
+
+      if (empty($config)) {
+        throw new \Exception('Provide valid configuration file path');
+      }
+
+      if (!($config instanceof ConfigurationInterface)) {
+        throw new \Exception('Invalid configuration file result. Expect ' . ConfigurationInterface::class);
+      }
+
+      return $config;
+    }
+
+
+    /**
+     * @param string[] $filters
+     * @return ToolsFilter
+     */
+    protected function createToolsFilter(array $filters) {
+
+      $include = null;
+      $exclude = null;
+
+
+      $fixerNames = explode(',', implode(',', $filters));
+      $fixerNames = array_map('trim', $fixerNames);
+      $fixerNames = array_filter($fixerNames);
+
+      foreach ($fixerNames as $name) {
+        if (strpos($name, '-') === 0) {
+          $exclude[] = substr($name, 1);
+        } else {
+          $include[] = $name;
+        }
+      }
+
+
+      $toolsFilter = new ToolsFilter();
+      $toolsFilter->setExclude($exclude);
+      $toolsFilter->setInclude($include);
+
+      return $toolsFilter;
+    }
 
   }

@@ -17,6 +17,7 @@ Perform code fix and review
 | ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
 | ✔     | ✔      | [PhpOpenTags](src/Tools/PhpOpenTags/README.md)                                   |
 | ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
+|       | ✔      | [Composer](src/Tools/Composer/README.md)                                     |
 
 
 ## Install
@@ -42,19 +43,19 @@ composer require funivan/cs:dev-master
 Create custom configuration file. For example `cs-fix.php`
 
 ```php
-<?
+<?php
   # file cs-fix.php
   require __DIR__ . '/vendor/autoload.php';
 
 
   use Funivan\Cs\Configuration\CsConfiguration;
-  use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactory;
 
   $configuration = CsConfiguration::createFixerConfiguration();
-  $configuration->setFileFinderFactory(new FileFinderFactory(__DIR__));
+  // You can set custom file finder
+  // $configuration->setFileFinder(new MyProjectCustomFileFinder());
 
   // You can add custom tools
-  $configuration->setTool(new \Funivan\Cs\Tools\LineEnding\LineEndingFixer());
+  // $configuration->setTool(new MyProjectCustomCheckTool());
 
 ```
 Then run fixer

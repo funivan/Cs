@@ -1,10 +1,10 @@
 <?php
 
-  namespace Funivan\Cs\Review\Tools;
+  namespace Funivan\Cs\Tools\Composer;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
   use Symfony\Component\Process\Process;
 
@@ -45,9 +45,7 @@
      */
     public function process(File $file, Report $report) {
 
-      $cmd = sprintf('composer validate %s', $file->getPath());
-
-      $process = new Process($cmd);
+      $process = new Process(sprintf('composer validate %s', $file->getPath()));
       $process->run();
 
       if ($process->isSuccessful()) {
@@ -57,7 +55,7 @@
 
       $errorOutput = $process->getErrorOutput();
       preg_match('!Parse error on line (\d+):!', $errorOutput, $matchedLine);
-      $line = 0;
+      $line = 1;
       if (isset($matchedLine[1])) {
         $line = (int) $matchedLine[1];
       }

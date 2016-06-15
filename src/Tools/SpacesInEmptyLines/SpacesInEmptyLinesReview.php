@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
-  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**

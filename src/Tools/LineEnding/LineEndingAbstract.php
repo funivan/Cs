@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\LineEnding;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Fs\File;
   use Funivan\PhpTokenizer\Query\Query;
   use Funivan\PhpTokenizer\Token;
 

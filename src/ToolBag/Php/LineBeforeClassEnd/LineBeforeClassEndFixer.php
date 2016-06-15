@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\ToolBag\Php\LineBeforeClassEnd;
 
-  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**

@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Configuration;
 
   use Funivan\Cs\FileTool\FileTool;
-  use Funivan\Cs\Review\Tools\ComposerReview;
   use Funivan\Cs\Review\Tools\PhpFileCloseTagReview;
   use Funivan\Cs\Review\Tools\PhpFileStartReview;
   use Funivan\Cs\Review\Tools\PhpSyntaxCheckReview;
   use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
   use Funivan\Cs\ToolBag\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
+  use Funivan\Cs\Tools\Composer\ComposerReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;

@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\FileTool;
 
-  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
 
   /**

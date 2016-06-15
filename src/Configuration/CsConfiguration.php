@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Configuration;
 
-  use Funivan\Cs\FileFinder\FinderFactory\FileFinderFactoryInterface;
-  use Funivan\Cs\FileFinder\FinderParams;
   use Funivan\Cs\FileTool\FileTool;
+  use Funivan\Cs\Fs\FileFinder\FileFinderInterface;
+  use Funivan\Cs\Fs\FileFinder\StandardFileFinder;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
@@ -12,9 +12,9 @@
   class CsConfiguration implements ConfigurationInterface {
 
     /**
-     * @var FileFinderFactoryInterface|null
+     * @var FileFinderInterface
      */
-    private $fileFinderFactory = null;
+    private $fileFinder;
 
     /**
      * @var FileTool[]
@@ -23,10 +23,18 @@
 
 
     /**
+     * @param FileFinderInterface $fileFinder
+     */
+    public function __construct(FileFinderInterface $fileFinder) {
+      $this->fileFinder = $fileFinder;
+    }
+
+
+    /**
      * @return CsConfiguration
      */
     public static function createFixerConfiguration() {
-      return (new CsConfiguration())->addTools(DefaultTools::getFixers());
+      return (new CsConfiguration(new StandardFileFinder()))->addTools(DefaultTools::getFixers());
     }
 
 
@@ -34,28 +42,24 @@
      * @return CsConfiguration
      */
     public static function createReviewConfiguration() {
-      return (new CsConfiguration())->addTools(DefaultTools::getReviews());
+      return (new CsConfiguration(new StandardFileFinder()))->addTools(DefaultTools::getReviews());
     }
 
 
     /**
      * @inheritdoc
      */
-    public function getFileFinderFactory(FinderParams $finderParams) {
-      if ($this->fileFinderFactory === null) {
-        throw new \Exception('Empty file finder factory');
-      }
-
-      return $this->fileFinderFactory->createFileFinder($finderParams);
+    public function getFilesFinder() {
+      return $this->fileFinder;
     }
 
 
     /**
-     * @param FileFinderFactoryInterface $fileFinder
+     * @param FileFinderInterface $fileFinder
      * @return $this
      */
-    public function setFileFinderFactory(FileFinderFactoryInterface $fileFinder) {
-      $this->fileFinderFactory = $fileFinder;
+    public function setFileFinder(FileFinderInterface $fileFinder) {
+      $this->fileFinder = $fileFinder;
       return $this;
     }
 

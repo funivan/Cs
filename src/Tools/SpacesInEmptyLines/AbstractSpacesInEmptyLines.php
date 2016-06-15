@@ -2,9 +2,9 @@
 
   namespace Funivan\Cs\Tools\SpacesInEmptyLines;
 
-  use Funivan\Cs\FileFinder\File;
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Filters\FileFilter;
+  use Funivan\Cs\Fs\File;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
   use Funivan\PhpTokenizer\Token;
@@ -43,7 +43,7 @@
      */
     protected function getLastInvalidToken(Collection $collection) {
       $lastToken = $collection->getLast();
-      if (preg_match('![ ]+\n*$!', $lastToken->getValue())) {
+      if ($lastToken and preg_match('![ ]+\n*$!', $lastToken->getValue())) {
         return $lastToken;
       }
       return null;

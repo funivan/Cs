@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\FileProcessor;
 
-  use Funivan\Cs\FileFinder\FileInfoCollection;
+  use Funivan\Cs\Fs\FilesCollection;
   use Funivan\Cs\Report\Report;
 
   /**
@@ -17,10 +17,10 @@
 
 
     /**
-     * @param FileInfoCollection $files
+     * @param FilesCollection $files
      * @param Report $report
      */
-    public function process(FileInfoCollection $files, Report $report) {
+    public function process(FilesCollection $files, Report $report) {
 
       if (empty($this->getTools())) {
         $this->getOutput()->writeln('<comment>Empty tools list</comment>');
@@ -55,12 +55,7 @@
 
           $fixed = true;
 
-          $filePathInfo = '';
-          if ($this->saveFiles === false) {
-            $filePathInfo = ' ## ' . $file->getPath();
-          }
-
-          $this->getOutput()->writeln('<info>' . $message . ': ' . $tool->getDescription() . $filePathInfo . '</info>');
+          $this->getOutput()->writeln('<info>' . $message . ': ' . $tool->getDescription() . '</info>');
         }
 
         if ($fixed and $this->saveFiles) {

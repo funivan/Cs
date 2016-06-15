@@ -2,7 +2,7 @@
 
   namespace Funivan\Cs\Filters;
 
-  use Funivan\Cs\FileFinder\File;
+  use Funivan\Cs\Fs\File;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
