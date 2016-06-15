@@ -4,6 +4,7 @@
 
   use Funivan\Cs\Fs\File;
   use Funivan\Cs\Report\Report;
+  use Funivan\PhpTokenizer\Token;
 
   /**
    *
@@ -51,21 +52,30 @@
 
       foreach ($tokens as $token) {
         $report->addMessage($file, $this, 'Set one line before closing tag', $token->getLine());
-        $value = $token->getValue();
 
-        if ($token->getType() !== T_WHITESPACE) {
-          $token->setValue($value . $emptyLines);
-        } else {
-          $lines = explode("\n", $value);
-          $lineStart = current($lines);
-          $lineEnd = end($lines);
-          $token->setValue($lineStart . $emptyLines . $lineEnd);
-
-        }
-
+        $newValue = $this->getTokenNewValue($token, $emptyLines);
+        $token->setValue($newValue);
       }
 
       $file->getContent()->set($collection->assemble());
+    }
+
+
+    /**
+     * @param Token $token
+     * @param string $emptyLines
+     * @return string
+     */
+    protected function getTokenNewValue(Token $token, $emptyLines) {
+
+      if ($token->getType() !== T_WHITESPACE) {
+        return $token->getValue() . $emptyLines;
+      }
+
+      $lines = explode("\n", $token->getValue());
+      $lineStart = current($lines);
+      $lineEnd = end($lines);
+      return $lineStart . $emptyLines . $lineEnd;
     }
 
   }
