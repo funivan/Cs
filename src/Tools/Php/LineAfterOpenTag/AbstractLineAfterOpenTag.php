@@ -13,7 +13,7 @@
   abstract class AbstractLineAfterOpenTag implements FileTool {
 
     /**
-     * @return string* @inheritdoc
+     * @inheritdoc
      */
     public function canProcess(File $file) {
       return (new FileFilter())->notDeleted()->extension(['php'])->isValid($file);
