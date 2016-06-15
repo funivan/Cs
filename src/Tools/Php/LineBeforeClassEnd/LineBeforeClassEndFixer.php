@@ -15,14 +15,6 @@
 
 
     /**
-     * @return $this
-     */
-    public static function createReview() {
-      return new static(false);
-    }
-
-
-    /**
      * @inheritdoc
      */
     public function getName() {

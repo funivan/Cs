@@ -14,15 +14,15 @@
   abstract class PhpOpenTagsAbstract implements FileTool {
 
     /**
-     * @var null
+     * @var int
      */
-    private $tagFormat = null;
+    private $tagFormat;
 
 
     /**
-     * @param int|null $tagFormat
+     * @param int $tagFormat
      */
-    public function __construct($tagFormat = null) {
+    public function __construct($tagFormat) {
       if (!PhpOpenTagFormat::isValidTagFormat($tagFormat)) {
         throw new \InvalidArgumentException('Invalid tag format');
       }
