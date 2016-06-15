@@ -53,7 +53,7 @@
       $firstLine = trim($process->getOutput());
 
       if (!in_array($firstLine, ['<?php', '<?', '#!/usr/bin/env php'])) {
-        $message = 'File must begin with `<?php` or `<?php` or `#!/usr/bin/env php`';
+        $message = 'File must begin with `<?php` or `<?` or `#!/usr/bin/env php`';
         $report->addMessage($file, $this, $message, 0);
       }
     }
