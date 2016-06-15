@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\Review\Tools;
+  namespace Funivan\Cs\Tools\Php\SyntaxCheck;
 
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Fs\File;
@@ -9,7 +9,6 @@
   use Symfony\Component\Process\Process;
 
   /**
-
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
   class PhpSyntaxCheckReview implements FileTool {
