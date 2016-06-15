@@ -37,7 +37,7 @@
 
 
     /**
-     * @return null|\string[]
+     * @return null|string[]
      */
     public function getExclude() {
       return $this->exclude;
@@ -45,7 +45,7 @@
 
 
     /**
-     * @param null|\string[] $exclude
+     * @param null|string[] $exclude
      * @return $this
      */
     public function setExclude(array $exclude = null) {
