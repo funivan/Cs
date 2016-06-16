@@ -63,7 +63,7 @@
         $append = $tokenValue . "\n\n" . $whitespaceValue;
 
         $token->setValue($append);
-        $report->addMessage($file, $this, 'Set one empty line after php open tag', $token->getValue());
+        $report->addMessage($file, $this, 'Set one empty line after php open tag', $token->getLine());
       }
 
       $file->getContent()->set($collection->assemble());
