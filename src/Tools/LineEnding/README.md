@@ -1,7 +1,7 @@
 # Line ending
 
 ## Fixer
-  Invalid line endings `CRLF` and `CR` will be replaced with `LF`
+  Invalid line endings `CRLF` (`\r\n`) and `CR` (`\r`) will be replaced with `LF` (`\n`)
 
   Name: `line_ending_fixer`
 
@@ -14,11 +14,11 @@
   *After*:
   ```
 ...echo 1;\n
-\n
+...\n
 ...echo 2;\n
   ```
 
 ## Review
-  Find `CRLF` and `CR` line ending
+  Find `CRLF` and `CR` line endings
 
   Name: `line_ending_review`
