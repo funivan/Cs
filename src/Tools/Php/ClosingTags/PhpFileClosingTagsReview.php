@@ -1,6 +1,6 @@
 <?php
 
-  namespace Funivan\Cs\Review\Tools;
+  namespace Funivan\Cs\Tools\Php\ClosingTags;
 
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Fs\File;
@@ -10,13 +10,11 @@
   use Funivan\PhpTokenizer\Query\Query;
 
   /**
-   * @todo create fixer
-   *
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpFileCloseTagReview implements FileTool {
+  class PhpFileClosingTagsReview implements FileTool {
 
-    const NAME = 'php_closing_tag_review';
+    const NAME = 'php_closing_tags_review';
 
 
     /**
@@ -51,7 +49,7 @@
       $tokens = Collection::createFromString($file->getContent()->get());
       $closedTags = $tokens->find((new Query())->valueIs('?>'));
       foreach ($closedTags as $token) {
-        $report->addMessage($file, $this, 'File contains ending tag', $token->getLine());
+        $report->addMessage($file, $this, 'File contains closing tag', $token->getLine());
       }
     }
 

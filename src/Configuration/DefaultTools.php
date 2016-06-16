@@ -3,10 +3,10 @@
   namespace Funivan\Cs\Configuration;
 
   use Funivan\Cs\FileTool\FileTool;
-  use Funivan\Cs\Review\Tools\PhpFileCloseTagReview;
   use Funivan\Cs\Tools\Composer\ComposerReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
+  use Funivan\Cs\Tools\Php\ClosingTags\PhpFileClosingTagsReview;
   use Funivan\Cs\Tools\Php\FileStartLine\PhpFileStartLineReview;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
@@ -51,7 +51,7 @@
         new LineBeforeClassEndReview(),
         new PhpFileStartLineReview(),
         new PhpSyntaxCheckReview(),
-        new PhpFileCloseTagReview(),
+        new PhpFileClosingTagsReview(),
         new SpacesInEmptyLinesReview(),
         new ComposerReview(),
         new LineAfterOpenTagReview(),
