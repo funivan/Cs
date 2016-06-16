@@ -4,10 +4,10 @@
 
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Review\Tools\PhpFileCloseTagReview;
-  use Funivan\Cs\Review\Tools\PhpFileStartReview;
   use Funivan\Cs\Tools\Composer\ComposerReview;
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
+  use Funivan\Cs\Tools\Php\FileStartLine\PhpFileStartLineReview;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
   use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
@@ -49,7 +49,7 @@
       return [
         new LineEndingReview(),
         new LineBeforeClassEndReview(),
-        new PhpFileStartReview(),
+        new PhpFileStartLineReview(),
         new PhpSyntaxCheckReview(),
         new PhpFileCloseTagReview(),
         new SpacesInEmptyLinesReview(),

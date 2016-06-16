@@ -1,20 +1,24 @@
 <?php
 
-  namespace Funivan\Cs\Review\Tools;
+  namespace Funivan\Cs\Tools\Php\FileStartLine;
 
   use Funivan\Cs\FileTool\FileTool;
   use Funivan\Cs\Fs\File;
   use Funivan\Cs\Fs\FileFilter;
   use Funivan\Cs\Report\Report;
-  use Symfony\Component\Process\Process;
 
   /**
-
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpFileStartReview implements FileTool {
+  class PhpFileStartLineReview implements FileTool {
 
-    const NAME = 'php_file_start_review';
+    const NAME = 'php_file_start_line_review';
+
+    const REGEXP = [
+      '~^<\?php(\s+|$)~',
+      '~^<\?(\s+|$)~',
+      '~#!/usr/bin/env php(\s+|$)~',
+    ];
 
 
     /**
@@ -29,7 +33,7 @@
      * @inheritdoc
      */
     public function getDescription() {
-      return 'Check php files start tag';
+      return 'Check php files first line';
     }
 
 
@@ -45,17 +49,17 @@
      * @inheritdoc
      */
     public function process(File $file, Report $report) {
-      $cmd = sprintf('read -r LINE < %s && echo $LINE', $file->getPath());
+      $fileContent = $file->getContent()->get();
 
-      $process = new Process($cmd);
-      $process->run();
-
-      $firstLine = trim($process->getOutput());
-
-      if (!in_array($firstLine, ['<?php', '<?', '#!/usr/bin/env php'])) {
-        $message = 'File must begin with `<?php` or `<?` or `#!/usr/bin/env php`';
-        $report->addMessage($file, $this, $message, 0);
+      foreach (self::REGEXP as $regexp) {
+        if (preg_match($regexp, $fileContent) === 1) {
+          return;
+        }
       }
+
+      $message = 'File must begin with `<?php` or `<?` or `#!/usr/bin/env php`';
+      $report->addMessage($file, $this, $message, 1);
+
     }
 
   }
