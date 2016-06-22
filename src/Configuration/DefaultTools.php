@@ -15,6 +15,7 @@
   use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagFormat;
   use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsFixer;
   use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsReview;
+  use Funivan\Cs\Tools\Php\ReturnTypeFormat\ReturnTypeFormatFixer;
   use Funivan\Cs\Tools\Php\SyntaxCheck\PhpSyntaxCheckReview;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesReview;
@@ -38,6 +39,7 @@
         new LineBeforeClassEndFixer(),
 
         new PhpOpenTagsFixer(PhpOpenTagFormat::LONG),
+        new ReturnTypeFormatFixer(),
       ];
     }
 

@@ -18,6 +18,7 @@ Perform code fix and review
 | ✔     | ✔      | [Php LineBeforeClassEnd](src/Tools/Php/LineBeforeClassEnd/README.md)                                     |
 |       | ✔      | [Php file start](src/Tools/Php/FileStartLine/README.md)                                     |
 |       | ✔      | [Php closing tags](src/Tools/Php/ClosingTags/README.md)                                     |
+| ✔     |        | [Php return type format](src/Tools/Php/ReturnTypeFormat/README.md)                                     |
 | ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
 | ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
 |       | ✔      | [Composer](src/Tools/Composer/README.md)                                     |
