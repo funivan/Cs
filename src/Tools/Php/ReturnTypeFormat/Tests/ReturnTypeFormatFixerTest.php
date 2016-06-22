@@ -14,12 +14,15 @@
     /**
      * @var bool
      */
-    private $isAvailable = true;
+    private static $isAvailable = true;
 
 
-    public function __construct($name = null, array $data = [], $dataName = '') {
-      parent::__construct($name, $data, $dataName);
-      $this->isAvailable = (boolean) version_compare(phpversion(), '7.0.0', '>=');
+    /**
+     * @inheritdoc
+     */
+    public static function setUpBeforeClass() {
+      parent::setUpBeforeClass();
+      self::$isAvailable = (boolean) version_compare(phpversion(), '7.0.0', '>=');
     }
 
 
@@ -87,7 +90,7 @@
      * @dataProvider getReturnTypeDataProvider
      */
     public function testReturn($input, $expect, array $delimiters = []) {
-      if ($this->isAvailable === false) {
+      if (self::$isAvailable === false) {
         $this->markTestSkipped('Tests can only be run on php 7.0 or greater');
         return;
       }
