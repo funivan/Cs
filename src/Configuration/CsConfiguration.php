@@ -111,6 +111,17 @@
 
 
     /**
+     * @param FileTool $fileTool
+     * @return $this
+     */
+    public function removeTool(FileTool $fileTool) {
+      $name = $fileTool->getName();
+      unset($this->tools[$name]);
+      return $this;
+    }
+
+
+    /**
      * @param string $name
      * @return FileTool|null
      */
