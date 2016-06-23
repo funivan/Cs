@@ -59,7 +59,7 @@
      * @return boolean
      */
     public function canProcess(File $file) {
-      return (new FileFilter())->extension(['php'])->isValid($file);
+      return (new FileFilter())->notDeleted()->extension(['php'])->isValid($file);
     }
 
 
