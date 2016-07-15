@@ -30,8 +30,8 @@
       $this->addOption('filter-tools', null, InputOption::VALUE_IS_ARRAY ^ InputOption::VALUE_REQUIRED, 'Filter tools by name', []);
 
       #
-      $this->addOption('list-tools', null, InputOption::VALUE_REQUIRED, 'Show Tools that will be applied to the files');
-      $this->addOption('list-all-tools', null, InputOption::VALUE_REQUIRED, 'Show All Tools that can be used');
+      $this->addOption('list-tools', null, InputOption::VALUE_NONE, 'Show Tools that will be applied to the files');
+      $this->addOption('list-all-tools', null, InputOption::VALUE_NONE, 'Show All Tools that can be used');
 
 
       parent::configure();
