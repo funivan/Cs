@@ -6,7 +6,7 @@
   use Funivan\Cs\Fs\File;
   use Funivan\Cs\Fs\FileFilter;
   use Funivan\PhpTokenizer\Collection;
-  use Funivan\PhpTokenizer\Pattern\Pattern;
+  use Funivan\PhpTokenizer\Pattern\PatternMatcher;
   use Funivan\PhpTokenizer\Pattern\Patterns\ClassPattern;
   use Funivan\PhpTokenizer\Token;
 
@@ -58,7 +58,7 @@
     protected function getInvalidTokens(Collection $collection) {
 
       $resultCollection = new Collection();
-      $classBody = (new Pattern($collection))->apply((new ClassPattern()))->getCollections();
+      $classBody = (new PatternMatcher($collection))->apply((new ClassPattern()))->getCollections();
       if (empty($classBody)) {
         return $resultCollection;
       }

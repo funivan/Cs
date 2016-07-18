@@ -7,7 +7,7 @@
   use Funivan\Cs\Fs\FileFilter;
   use Funivan\Cs\Report\Report;
   use Funivan\PhpTokenizer\Collection;
-  use Funivan\PhpTokenizer\Pattern\Pattern;
+  use Funivan\PhpTokenizer\Pattern\PatternMatcher;
   use Funivan\PhpTokenizer\QuerySequence\QuerySequence;
   use Funivan\PhpTokenizer\Strategy\Search;
   use Funivan\PhpTokenizer\Strategy\Strict;
@@ -70,7 +70,7 @@
     public function process(File $file, Report $report) {
       $collection = Collection::createFromString($file->getContent()->get());
 
-      (new Pattern($collection))->apply(function (QuerySequence $q) {
+      (new PatternMatcher($collection))->apply(function (QuerySequence $q) {
         $any = Strict::create()->valueLike('!.+!');
 
         $q->strict('function');
