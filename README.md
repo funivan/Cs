@@ -12,16 +12,17 @@ Perform code fix and review
 
 ## Tools list
 
-| Fixer | Review | Link                                                                             |
-|:-----:|:------:|:---------------------------------------------------------------------------------|
-| ✔     | ✔      | [Php OpenTags](src/Tools/Php/OpenTags/README.md)                                   |
-| ✔     | ✔      | [Php LineBeforeClassEnd](src/Tools/Php/LineBeforeClassEnd/README.md)                                     |
-|       | ✔      | [Php file start](src/Tools/Php/FileStartLine/README.md)                                     |
-|       | ✔      | [Php closing tags](src/Tools/Php/ClosingTags/README.md)                                     |
-| ✔     |        | [Php return type format](src/Tools/Php/ReturnTypeFormat/README.md)                                     |
-| ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                     |
-| ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                     |
-|       | ✔      | [Composer](src/Tools/Composer/README.md)                                     |
+| Fixer | Review | Link                                                                                                                           |
+|:-----:|:------:|:-------------------------------------------------------------------------------------------------------------------------------|
+| ✔     | ✔      | [Php OpenTags](src/Tools/Php/OpenTags/README.md)                                                                               |
+| ✔     | ✔      | [Php LineBeforeClassEnd](src/Tools/Php/LineBeforeClassEnd/README.md)                                                           |
+|       | ✔      | [Php file start](src/Tools/Php/FileStartLine/README.md)                                                                        |
+|       | ✔      | [Php closing tags](src/Tools/Php/ClosingTags/README.md)                                                                        |
+| ✔     |        | [Php return type format](src/Tools/Php/ReturnTypeFormat/README.md)                                                             |
+| ✔     | ✔      | [Php redundant Null PropertyValue](src/Tools/Php/RedundantNullPropertyValue/README.md)                                         |
+| ✔     | ✔      | [SpacesInEmptyLines](src/Tools/SpacesInEmptyLines/README.md)                                                                   |
+| ✔     | ✔      | [LineEnding](src/Tools/LineEnding/README.md)                                                                                   |
+|       | ✔      | [Composer](src/Tools/Composer/README.md)                                                                                       |
 
 
 ## Install
