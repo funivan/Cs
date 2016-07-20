@@ -7,7 +7,7 @@
   Name: `php_syntax_check_review`
   ```php
     <?php
-    # error lines : 5
+    # error lines : 4
     af
     echo 123;
   ```
