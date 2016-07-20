@@ -70,8 +70,6 @@
         $fixerClass = $baseName . 'Fixer';
         $reviewClass = $baseName . 'Review';
 
-        spl_autoload($fixerClass);
-        spl_autoload($reviewClass);
 
         $hasFixer = class_exists($fixerClass);
         $hasReview = class_exists($reviewClass);
