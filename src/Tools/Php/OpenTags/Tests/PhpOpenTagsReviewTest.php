@@ -2,14 +2,14 @@
 
   namespace Funivan\Cs\Tools\Php\OpenTags\Tests;
 
+  use Funivan\Cs\Tools\Php\OpenTags\OpenTagsReview;
   use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagFormat;
-  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsReview;
-  use Tests\Funivan\Cs\ReviewTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class PhpOpenTagsReviewTest extends ReviewTestCase {
+  class PhpOpenTagsReviewTest extends BaseTestCase {
 
 
     /**
@@ -74,14 +74,12 @@ echo 1?>
      * @param bool $process
      */
     public function testInvalidOpenTags($tagType, $input, array $expectErrorLines, $process = true) {
-      if ($process===false) {
-        $this->markTestSkipped('PHP short open tags are not enabled.');
+      if ($process === false) {
+        static::markTestSkipped('PHP short open tags are not enabled.');
         return;
       }
-      $tool = new PhpOpenTagsReview($tagType);
-      $report = $this->process($tool, $input);
-      $this->assertInvalidLinesInReport($report, $expectErrorLines);
-
+      $tool = new OpenTagsReview($tagType);
+      static::assertReview($tool, $input, $expectErrorLines);
     }
 
   }

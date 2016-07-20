@@ -2,13 +2,13 @@
 
   namespace Funivan\Cs\Tools\Php\ClosingTags\Tests;
 
-  use Funivan\Cs\Tools\Php\ClosingTags\PhpFileClosingTagsReview;
+  use Funivan\Cs\Tools\Php\ClosingTags\ClosingTagsReview;
 
 
   /**
    *
    */
-  class PhpFileClosingTagsReviewTest extends \Tests\Funivan\Cs\ReviewTestCase {
+  class PhpFileClosingTagsReviewTest extends \Tests\Funivan\Cs\BaseTestCase {
 
     /**
      * @return array
@@ -47,8 +47,7 @@
      * @param array $invalidLines
      */
     public function testCheckClosingTags($input, array $invalidLines) {
-      $report = $this->process(new PhpFileClosingTagsReview(), $input);
-      $this->assertInvalidLinesInReport($report, $invalidLines);
+      static::assertReview(new ClosingTagsReview(), $input, $invalidLines);
     }
 
   }

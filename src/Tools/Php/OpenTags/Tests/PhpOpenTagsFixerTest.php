@@ -2,14 +2,14 @@
 
   namespace Funivan\Cs\Tools\Php\OpenTags\Tests;
 
+  use Funivan\Cs\Tools\Php\OpenTags\OpenTagsFixer;
   use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagFormat;
-  use Funivan\Cs\Tools\Php\OpenTags\PhpOpenTagsFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class PhpOpenTagsFixerTest extends FixerTestCase {
+  class PhpOpenTagsFixerTest extends BaseTestCase {
 
 
     /**
@@ -48,7 +48,7 @@ echo 1',
      * @param string $expect
      */
     public function testConvertTags($tagFormat, $input, $expect) {
-      $this->process(new PhpOpenTagsFixer($tagFormat), $input, $expect);
+      self::assertFixer(new OpenTagsFixer($tagFormat), $input, $expect);
     }
 
   }

@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Tools\Composer\Tests;
 
   use Funivan\Cs\Tools\Composer\ComposerReview;
-  use Tests\Funivan\Cs\ReviewTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class ComposerReviewTest extends ReviewTestCase {
+  class ComposerReviewTest extends BaseTestCase {
 
     /**
      * @return array
@@ -41,10 +41,7 @@
      */
     public function testComposerFile($input, array $expectErrorLines) {
       $tool = new ComposerReview();
-      $report = $this->process($tool, $input);
-
-      $this->assertInvalidLinesInReport($report, $expectErrorLines);
-
+      static::assertReview($tool, $input, $expectErrorLines);
     }
 
   }

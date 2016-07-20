@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Tools\SpacesInEmptyLines\Tests;
 
   use Funivan\Cs\Tools\SpacesInEmptyLines\SpacesInEmptyLinesFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class ReplaceSpacesInEmptyLinesFixerTest extends FixerTestCase {
+  class ReplaceSpacesInEmptyLinesFixerTest extends BaseTestCase {
 
     /**
      * @return array
@@ -61,7 +61,7 @@ echo 2;',
       $input = str_replace('.', ' ', $input);
       $expect = str_replace('.', ' ', $expect);
 
-      $this->process(new SpacesInEmptyLinesFixer(), $input, $expect);
+      BaseTestCase::assertFixer(new SpacesInEmptyLinesFixer(), $input, $expect);
     }
 
   }

@@ -22,7 +22,8 @@
     /**
      * @param int $tagFormat
      */
-    public function __construct($tagFormat) {
+    public function __construct($tagFormat = null) {
+      $tagFormat = $tagFormat !== null ? $tagFormat : PhpOpenTagFormat::LONG;
       if (!PhpOpenTagFormat::isValidTagFormat($tagFormat)) {
         throw new \InvalidArgumentException('Invalid tag format');
       }

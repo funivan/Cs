@@ -3,12 +3,11 @@
   namespace Funivan\Cs\Tools\LineEnding\Tests;
 
   use Funivan\Cs\Tools\LineEnding\LineEndingFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class LineEndingFixerTest extends FixerTestCase {
+  class LineEndingFixerTest extends \Tests\Funivan\Cs\BaseTestCase {
 
     /**
      * @return array
@@ -62,12 +61,9 @@
       $input = str_replace("\n", '', $input);
       $expect = str_replace("\n", '', $expect);
       $input = strtr($input, $map);
+      $expect = strtr($expect, $map);
 
-      $output = $this->convert(new LineEndingFixer(), $input);
-
-      $output = strtr($output, array_flip($map));
-      $this->assertEquals($expect, $output);
-
+      \Tests\Funivan\Cs\BaseTestCase::assertFixer(new LineEndingFixer(), $input, $expect);
     }
 
   }

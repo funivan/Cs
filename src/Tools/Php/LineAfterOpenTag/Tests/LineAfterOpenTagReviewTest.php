@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Tools\Php\LineAfterOpenTag\Tests;
 
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagReview;
-  use Tests\Funivan\Cs\ReviewTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class LineAfterOpenTagReviewTest extends ReviewTestCase {
+  class LineAfterOpenTagReviewTest extends BaseTestCase {
 
     /**
      * @return array
@@ -70,12 +70,11 @@ echo 1;
      */
     public function testLineAfterOpenTag($input, array $errorLines, $process = true) {
       if ($process === false) {
-        $this->markTestSkipped('PHP short open tags are not enabled.');
+        static::markTestSkipped('PHP short open tags are not enabled.');
         return;
       }
       $tool = new LineAfterOpenTagReview();
-      $report = $this->process($tool, $input);
-      $this->assertInvalidLinesInReport($report, $errorLines);
+      static::assertReview($tool, $input, $errorLines);
     }
 
   }

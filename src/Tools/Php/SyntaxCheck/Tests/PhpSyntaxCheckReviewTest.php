@@ -2,13 +2,13 @@
 
   namespace Funivan\Cs\Tools\Php\SyntaxCheck\Tests;
 
-  use Funivan\Cs\Tools\Php\SyntaxCheck\PhpSyntaxCheckReview;
-  use Tests\Funivan\Cs\ReviewTestCase;
+  use Funivan\Cs\Tools\Php\SyntaxCheck\SyntaxCheckReview;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class PhpSyntaxCheckReviewTest extends ReviewTestCase {
+  class PhpSyntaxCheckReviewTest extends BaseTestCase {
 
     /**
      * @return array
@@ -38,8 +38,7 @@
      * @param array $expectErrorLines
      */
     public function testPhpFileSyntax($input, array $expectErrorLines) {
-      $report = $this->process(new PhpSyntaxCheckReview(), $input);
-      $this->assertInvalidLinesInReport($report, $expectErrorLines);
+      static::assertReview(new SyntaxCheckReview(), $input, $expectErrorLines);
     }
 
   }

@@ -9,13 +9,15 @@
   Name: `php_line_before_class_end_fixer`
 
   *Before*:
-  ```<?php
+  ```php
+  <?php
       class A {
       }
   ```
 
   *After*:
-  ```<?
+  ```php
+  <?php
       class A {
 
       }
@@ -26,7 +28,12 @@
   Check the number of empty lines before class closing symbol.
 
   Name: `php_line_before_class_end_review`
-
+  ```php
+  <?php
+  class A {
+  }
+  # error lines : 2
+  ```
 
 
 ## Configuration
@@ -35,7 +42,10 @@ By default we expect 1 empty line.
 You can set any number from 0 to ...
 
 ```php
-<?
+<?php
+  
+    require __DIR__.'/vendor/autoload.php';
+         
     use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
     use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndReview;
 

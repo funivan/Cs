@@ -11,7 +11,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpSyntaxCheckReview implements FileTool {
+  class SyntaxCheckReview implements FileTool {
 
     const NAME = 'php_syntax_check_review';
 

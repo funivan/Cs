@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Tools\Php\LineAfterOpenTag\Tests;
 
   use Funivan\Cs\Tools\Php\LineAfterOpenTag\LineAfterOpenTagFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class LineAfterOpenTagFixerTest extends FixerTestCase {
+  class LineAfterOpenTagFixerTest extends BaseTestCase {
 
 
     /**
@@ -84,10 +84,11 @@ echo 1;',
      */
     public function testSetEmptyLine($input, $expect, $process = true) {
       if ($process === false) {
-        $this->markTestSkipped('PHP short open tags are not enabled.');
+        static::markTestSkipped('PHP short open tags are not enabled.');
         return;
       }
-      $this->process(new LineAfterOpenTagFixer(), $input, $expect);
+
+      self::assertFixer(new LineAfterOpenTagFixer(), $input, $expect);
     }
 
   }

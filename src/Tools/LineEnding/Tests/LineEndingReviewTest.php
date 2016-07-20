@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Tools\Tests\LineEnding;
 
   use Funivan\Cs\Tools\LineEnding\LineEndingReview;
-  use Tests\Funivan\Cs\ReviewTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class LineEndingReviewTest extends ReviewTestCase {
+  class LineEndingReviewTest extends BaseTestCase {
 
 
     /**
@@ -57,8 +57,7 @@
       $input = strtr($input, $map);
 
 
-      $report = $this->process(new LineEndingReview(), $input);
-      $this->assertInvalidLinesInReport($report, $expectErrorLines);
+      static::assertReview(new LineEndingReview(), $input, $expectErrorLines);
     }
 
   }

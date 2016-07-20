@@ -3,12 +3,12 @@
   namespace Funivan\Cs\Tools\Php\LineBeforeClassEnd\Tests;
 
   use Funivan\Cs\Tools\Php\LineBeforeClassEnd\LineBeforeClassEndFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
   /**
    *
    */
-  class LineBeforeClassEndFixerTest extends FixerTestCase {
+  class LineBeforeClassEndFixerTest extends BaseTestCase {
 
     /**
      * @return array
@@ -54,13 +54,15 @@
 
     /**
      * @dataProvider getLineBeforeClassEndDataProvider
+     * @param int $linesNum
+     * @param string $input
+     * @param string $expect
      */
     public function testLineBeforeClassEnd($linesNum, $input, $expect) {
       $tool = new LineBeforeClassEndFixer();
       $tool->setLinesNum($linesNum);
 
-
-      $this->process($tool, $input, $expect);
+      self::assertFixer($tool, $input, $expect);
     }
 
   }

@@ -8,7 +8,7 @@
   /**
    *
    */
-  class PhpOpenTagsReview extends PhpOpenTagsAbstract {
+  class OpenTagsReview extends PhpOpenTagsAbstract {
 
     const NAME = 'php_open_tags_review';
 

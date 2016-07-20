@@ -70,6 +70,7 @@
       $this->callback[] = function (File $file) use ($status) {
         return in_array($file->getStatus(), $status);
       };
+      return $this;
     }
 
 

@@ -8,11 +8,12 @@
   use Funivan\Cs\Report\Report;
   use Funivan\PhpTokenizer\Collection;
   use Funivan\PhpTokenizer\Query\Query;
+  use Funivan\PhpTokenizer\TokenFinder;
 
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpFileClosingTagsReview implements FileTool {
+  class ClosingTagsReview implements FileTool {
 
     const NAME = 'php_closing_tags_review';
 
@@ -47,7 +48,7 @@
     public function process(File $file, Report $report) {
 
       $tokens = Collection::createFromString($file->getContent()->get());
-      $closedTags = $tokens->find((new Query())->valueIs('?>'));
+      $closedTags = (new TokenFinder($tokens))->find((new Query())->typeIs(T_CLOSE_TAG));
       foreach ($closedTags as $token) {
         $report->addMessage($file, $this, 'File contains closing tag', $token->getLine());
       }

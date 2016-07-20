@@ -10,7 +10,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpFileStartLineReview implements FileTool {
+  class FileStartLineReview implements FileTool {
 
     const NAME = 'php_file_start_line_review';
 

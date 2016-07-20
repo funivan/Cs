@@ -8,7 +8,7 @@
   /**
    *
    */
-  class RedundantNullPropertyValueReviewTest extends \Tests\Funivan\Cs\ReviewTestCase {
+  class RedundantNullPropertyValueReviewTest extends \Tests\Funivan\Cs\BaseTestCase {
 
     /**
      * @return array
@@ -53,8 +53,8 @@
      */
     public function testCheck($input, array $expectErrorLines) {
       $tool = new RedundantNullPropertyValueReview();
-      $report = $this->process($tool, $input);
-      $this->assertInvalidLinesInReport($report, $expectErrorLines);
+      static::assertReview($tool, $input, $expectErrorLines);
+
     }
 
   }

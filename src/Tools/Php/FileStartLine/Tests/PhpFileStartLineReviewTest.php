@@ -2,12 +2,12 @@
 
   namespace Funivan\Cs\Tools\Php\FileStartLine\Tests;
 
-  use Funivan\Cs\Tools\Php\FileStartLine\PhpFileStartLineReview;
+  use Funivan\Cs\Tools\Php\FileStartLine\FileStartLineReview;
 
   /**
    *
    */
-  class PhpFileStartLineReviewTest extends \Tests\Funivan\Cs\ReviewTestCase {
+  class PhpFileStartLineReviewTest extends \Tests\Funivan\Cs\BaseTestCase {
 
     /**
      * @return array
@@ -44,8 +44,7 @@
      * @param array $expectErrorLines
      */
     public function testTestFileStart($input, array $expectErrorLines) {
-      $report = $this->process(new PhpFileStartLineReview(), $input);
-      $this->assertInvalidLinesInReport($report, $expectErrorLines);
+      static::assertReview(new FileStartLineReview(), $input, $expectErrorLines);
     }
 
   }

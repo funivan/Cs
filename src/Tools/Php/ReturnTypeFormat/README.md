@@ -6,13 +6,15 @@
   By default return type should contain one space before and after.
 
   *Before*:
-   ```<?php
-    function findUser():\UserModel {}
+   ```php
+   <?php
+    function findUser():\stdClass{}
    ```
 
    *After*:
-   ```<?php
-    function findUser() : \UserModel {}
+   ```php
+   <?php
+    function findUser() : \stdClass{}
    ```
 
   Name: `php_return_type_format_fixer`
@@ -21,9 +23,11 @@
   You can specify any symbols that will be places
   before and after return type declaration.
 
-   ```<?php
-
-   $fixer = new ReturnTypeFormatFixer();
+   ```php
+   <?php
+   require_once  __DIR__.'/vendor/autoload.php';
+   
+   $fixer = new \Funivan\Cs\Tools\Php\ReturnTypeFormat\ReturnTypeFormatFixer();
    $fixer->setBefore(' ');
    $fixer->setAfter(' ');
 

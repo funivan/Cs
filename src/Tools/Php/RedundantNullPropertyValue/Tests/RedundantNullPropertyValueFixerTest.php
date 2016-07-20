@@ -3,13 +3,13 @@
   namespace Funivan\Cs\Tools\Php\RedundantNullPropertyValue\Tests;
 
   use Funivan\Cs\Tools\Php\RedundantNullPropertyValue\RedundantNullPropertyValueFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
 
   /**
    *
    */
-  class RedundantNullPropertyValueFixerTest extends FixerTestCase {
+  class RedundantNullPropertyValueFixerTest extends BaseTestCase {
 
     /**
      * @return array
@@ -73,8 +73,7 @@
      * @param string $expect
      */
     public function testReplaceRedundantNullValues($input, $expect) {
-      $output = $this->convert(new RedundantNullPropertyValueFixer(), $input);
-      static::assertEquals($expect, $output);
+      self::assertFixer(new RedundantNullPropertyValueFixer(), $input, $expect);
     }
 
   }

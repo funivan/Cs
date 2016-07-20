@@ -11,8 +11,8 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Test Suite">
-            <directory>tests</directory>
             <directory>src/</directory>
+            <directory>Tests</directory>
         </testsuite>
     </testsuites>
     <filter>

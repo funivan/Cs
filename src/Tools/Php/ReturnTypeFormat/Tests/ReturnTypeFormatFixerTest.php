@@ -3,13 +3,13 @@
   namespace Funivan\Cs\Tools\Php\ReturnTypeFormat\Tests;
 
   use Funivan\Cs\Tools\Php\ReturnTypeFormat\ReturnTypeFormatFixer;
-  use Tests\Funivan\Cs\FixerTestCase;
+  use Tests\Funivan\Cs\BaseTestCase;
 
 
   /**
    *
    */
-  class ReturnTypeFormatFixerTest extends FixerTestCase {
+  class ReturnTypeFormatFixerTest extends BaseTestCase {
 
     /**
      * @var bool
@@ -88,10 +88,13 @@
 
     /**
      * @dataProvider getReturnTypeDataProvider
+     * @param $input
+     * @param $expect
+     * @param array $delimiters
      */
     public function testReturn($input, $expect, array $delimiters = []) {
       if (self::$isAvailable === false) {
-        $this->markTestSkipped('Tests can only be run on php 7.0 or greater');
+        static::markTestSkipped('Tests can only be run on php 7.0 or greater');
         return;
       }
 
@@ -104,7 +107,7 @@
         $fixer->setAfter($delimiters[1]);
       }
 
-      $this->process($fixer, $input, $expect);
+      BaseTestCase::assertFixer($fixer, $input, $expect);
     }
 
   }

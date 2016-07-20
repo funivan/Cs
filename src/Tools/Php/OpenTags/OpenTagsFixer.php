@@ -8,7 +8,7 @@
   /**
    * @author Ivan Shcherbak <dev@funivan.com> 2016
    */
-  class PhpOpenTagsFixer extends PhpOpenTagsAbstract {
+  class OpenTagsFixer extends PhpOpenTagsAbstract {
 
     const NAME = 'php_open_tags_fixer';
 
