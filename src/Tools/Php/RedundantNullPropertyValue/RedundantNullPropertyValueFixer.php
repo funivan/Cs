@@ -1,4 +1,4 @@
-<?
+<?php
 
   namespace Funivan\Cs\Tools\Php\RedundantNullPropertyValue;
 
@@ -45,7 +45,7 @@
      * @return boolean
      */
     public function canProcess(File $file) {
-      return (new FileFilter($file))->notDeleted()->extension(['php'])->isValid($file);
+      return (new FileFilter())->notDeleted()->extension(['php'])->isValid($file);
     }
 
 
@@ -58,7 +58,7 @@
 
 
       $invalidProperties = InvalidPropertyFinder::find($collection);
-      if (count($invalidProperties) == 0) {
+      if (count($invalidProperties) === 0) {
         return;
       }
 
@@ -71,4 +71,5 @@
 
       $file->getContent()->set($collection->assemble());
     }
+
   }

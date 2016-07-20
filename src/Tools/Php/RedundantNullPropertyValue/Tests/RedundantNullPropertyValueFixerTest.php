@@ -74,7 +74,7 @@
      */
     public function testReplaceRedundantNullValues($input, $expect) {
       $output = $this->convert(new RedundantNullPropertyValueFixer(), $input);
-      $this->assertEquals($expect, $output);
-
+      static::assertEquals($expect, $output);
     }
+
   }
