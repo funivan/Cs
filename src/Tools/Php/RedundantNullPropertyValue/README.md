@@ -1,9 +1,9 @@
 # Php Redundant Null Property Value
 
 ## Fixer
-  Remove NULL values from the properties values 
+  Remove NULL from the properties values 
   
-  Name: `php_line_before_redundant_null_property_value_fixer_end_fixer`
+  Name: `redundant_null_property_value_fixer`
 
   *Before*:
   ```<?php
