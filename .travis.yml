@@ -10,6 +10,7 @@ matrix:
         - php: hhvm
 
 before_script:
+  - echo -e 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source --dev
 
