@@ -10,7 +10,7 @@ matrix:
         - php: hhvm
 
 before_script:
-  - if [ $(phpenv version-name) != "hhvm" ]; then echo -e 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini fi
+  - if [ $(phpenv version-name) != "hhvm" ]; then echo -e 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source --dev
 
