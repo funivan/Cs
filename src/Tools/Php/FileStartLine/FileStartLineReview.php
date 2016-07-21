@@ -14,7 +14,10 @@
 
     const NAME = 'php_file_start_line_review';
 
-    const REGEXP = [
+    /**
+     * @var array
+     */
+    private static $regexp = [
       '~^<\?php(\s+|$)~',
       '~^<\?(\s+|$)~',
       '~#!/usr/bin/env php(\s+|$)~',
@@ -51,7 +54,7 @@
     public function process(File $file, Report $report) {
       $fileContent = $file->getContent()->get();
 
-      foreach (self::REGEXP as $regexp) {
+      foreach (self::$regexp as $regexp) {
         if (preg_match($regexp, $fileContent) === 1) {
           return;
         }
